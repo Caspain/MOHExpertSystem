@@ -36,14 +36,17 @@ public class Main  extends Application {
 		//get components 
 	
 		primaryStage.setResizable(false);
+		//call styles
+		
 		primaryStage.setScene(scene);
+		scene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 		primaryStage.show();
 	}
 	
 	private GridPane Components(GridPane root){
 		Text LoginText = new Text("Login");
 		LoginText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		
+		LoginText.setId("login");
 		root.add(LoginText, 0, 0,2,1);
 		
 		Label UserName = new Label("User Name");
@@ -58,6 +61,9 @@ public class Main  extends Application {
 		root.add(Password, 1, 2);
 		
 		Button btn = new Button("Sign in"); 
+		btn.setId("sign-in");
+		btn.setPrefWidth(85);
+		btn.minHeight(79.9);
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		hbBtn.getChildren().add(btn); 
@@ -68,6 +74,9 @@ public class Main  extends Application {
 			//fake login here
 		});
 		return root;
+	}
+	private boolean getStyleSheet(Scene scene){
+		return scene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm()); 
 	}
 
 }
