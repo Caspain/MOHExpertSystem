@@ -13,19 +13,19 @@ obese(30.0). % over 30
 % bmi rules
 printHeight(Height):- write("Height in meters =  "), nl,(format('~3f',[Height])),classify_bmi(Height).
 
-convertToM(CalcMeters):- CalcM is (CalcMeters / 100).
+convertToM(CalcMeters,Height):- CalcM is (CalcMeters / 100),Height is CalcM .
 
-convertToCm(CalcFeetInches):- CalcCm is (CalcFeetInches * 2.540),convertToM(CalcCm).
+convertToCm(CalcFeetInches,Height):- CalcCm is (CalcFeetInches * 2.540), convertToM(CalcCm,Height).
 
-calculate_height(Feet,Inches):- 
+calculate_height(Feet,Inches,Height):- 
  CalcFeet is (Feet * 12 ), CalcFeetInches is 
- (CalcFeet + Inches), convertToCm(CalcFeetInches).
+ (CalcFeet + Inches), convertToCm(CalcFeetInches,Height).
  
  % calculates the body mass index of the individual, R is Height squared.
- calculate_bmi(Height,Weight):-power(Height,2,R) , Bmi is (WEIGHT divs R).
+ calculate_bmi(Height,Weight,Bmi):- R is (Height * Height) , Bmi is (Weight / R).
  
  %calculate kilograms weight to pounds
- calculate_weight(Weight):- Pounds is (Weight * 2.20462).
+ calculate_weight(Weight,Pounds):- Pounds is (Weight * 2.20462).
  
  
  
@@ -38,8 +38,8 @@ Status = 'UnderWeight'; Bmi >= 18.5 ,
 
 
 input(Feet,Inches,Weight):-
-calculate_height(Feet,Inches),
-calculate_weight(Weight),
-calculate_bmi(CalcM,Pounds),
+calculate_height(Feet,Inches,Height), % returned Height in meters.
+calculate_weight(Weight,Pounds),  % returned weight in pounds.
+calculate_bmi(Height,Pounds,Bmi), % returns individual calculated body mass index.
 classify_bmi(Bmi). 
 
