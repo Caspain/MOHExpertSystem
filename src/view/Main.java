@@ -3,12 +3,14 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -73,10 +75,54 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
-			//fake login here
+			Scenes.Query.SetUp();// setup
+			this.primaryStage.setTitle("Query");
+			primaryStage.setScene(Scenes.QueryScene);
+			Scenes.QueryScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 		});
 		return root;
 	}
 
-
+ public static class Scenes {
+	 public static Scene QueryScene = null;
+	 public static Scene InputScene = null;
+	 
+	 public static class Query{
+		 public static Text query = new Text("Query");
+		 public static TextField Field = new TextField();
+		 public static Button SubmitQuery = new Button("Submit");
+				 
+		 public static void SetUp(){
+			 FlowPane root = new  FlowPane();
+			 root.setHgap(5);
+			 root.setVgap(15);
+			 root.setPadding(new Insets(5));
+		//	 root.setAlignment(Pos.CENTER);
+			// root.setRowValignment(VPos.CENTER);
+			 root.getChildren().add(query);
+			 root.getChildren().add(Field);
+			HBox queryBox = new HBox();
+			queryBox.setAlignment(Pos.BOTTOM_LEFT);
+			queryBox.getChildren().add(SubmitQuery);
+			root.getChildren().add(queryBox);
+			 QueryScene = new Scene(root,200,69);
+			  root.setId("query-root");
+			  Field.setId("field");
+			  SubmitQuery.setId("submit-query");
+			  SubmitQuery.setPrefWidth(65);
+			  
+			  SubmitQuery.setOnAction((event)->{
+				
+				  String query = getQueryText();
+				  
+			  });
+		 }
+		 public static String getQueryText(){
+			 return Field.getText().toString();
+		 }
+	 }
+	 public static class Input{
+		 
+	 }
+ }
 }
