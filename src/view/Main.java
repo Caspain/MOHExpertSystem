@@ -5,6 +5,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -114,11 +116,20 @@ public class Main  extends Application {
 			  SubmitQuery.setOnAction((event)->{
 				
 				  String query = getQueryText();
-				  
+				  ShowQueryResponse(query);
 			  });
 		 }
 		 public static String getQueryText(){
 			 return Field.getText().toString();
+		 }
+		 public static void ShowQueryResponse(String query){
+				Alert alert = new Alert(AlertType.INFORMATION);
+				
+				alert.setTitle("Query Response");
+				alert.setHeaderText("Information Returned");
+				alert.setContentText(query);
+				alert.show();
+
 		 }
 	 }
 	 public static class Input{
