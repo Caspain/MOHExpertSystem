@@ -1,3 +1,18 @@
+/**
+The Ministry of Health (MOH) has embarked on 
+some programs/initiatives aimed at 
+identifying and controlling certain
+ lifestyle diseases such as diabetes.
+ The Director of the MOH highlighted
+ the need to educate the public about
+ these diseases and has made the move 
+ to partner with the school of computing 
+ at the University 
+of Technology Jamaica (UTECH) to 
+create an Expert system that 
+could assist the MOH in its efforts.
+**/
+
 % knowledge base for moh
 
 % BMI WEIGHT CATEGORIES
