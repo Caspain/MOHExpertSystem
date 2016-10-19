@@ -75,8 +75,6 @@ public class Main  extends Application {
 		});
 		return root;
 	}
-	private boolean getStyleSheet(Scene scene){
-		return scene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm()); 
-	}
+
 
 }
