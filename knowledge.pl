@@ -22,15 +22,15 @@ calculate_height(Feet,Inches,Height):-
  (CalcFeet + Inches), convertToCm(CalcFeetInches,Height).
  
  % calculates the body mass index of the individual, R is Height squared.
- calculate_bmi(Height,Weight,Bmi):- R is (Height * Height) , Bmi is (Weight / R).
+ calculate_bmi(Height,Weight,Bmi):-nl, R is (Height * Height) , Bmi is (Weight / R).
  
  %calculate kilograms weight to pounds
- calculate_weight(Weight,Pounds):- Pounds is (Weight * 2.20462).
+ calculate_weight(Weight,Kilogram):- Kilogram is (Weight * 0.453592).
  
  
  
  % bmi classification based on height(meters) and weight(pounds).
-classify_bmi(Bmi):-(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
+classify_bmi(Bmi):- nl , write(Bmi),(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
 Status = 'UnderWeight'; Bmi >= 18.5 ,
  Bmi =< 24.9 -> Status = 'NormalWeight';
  Bmi >= 25 , Bmi =< 29.9 -> Status = 'OverWeight'
@@ -39,7 +39,7 @@ Status = 'UnderWeight'; Bmi >= 18.5 ,
 
 input(Feet,Inches,Weight):-
 calculate_height(Feet,Inches,Height), % returned Height in meters.
-calculate_weight(Weight,Pounds),  % returned weight in pounds.
-calculate_bmi(Height,Pounds,Bmi), % returns individual calculated body mass index.
+calculate_weight(Weight,Kilogram),  % returned weight in pounds.
+calculate_bmi(Height,Kilogram,Bmi), % returns individual calculated body mass index.
 classify_bmi(Bmi). 
 
