@@ -24,7 +24,7 @@ calculate_height(Feet,Inches,Height):-
  % calculates the body mass index of the individual, R is Height squared.
  calculate_bmi(Height,Weight,Bmi):-nl, R is (Height * Height) , Bmi is (Weight / R).
  
- %calculate kilograms weight to pounds
+ %calculate  pounds weight to kilogram.
  calculate_weight(Weight,Kilogram):- Kilogram is (Weight * 0.453592).
  
  
@@ -37,9 +37,21 @@ Status = 'UnderWeight'; Bmi >= 18.5 ,
 ),nl,write(Status).
 
 
-input(Feet,Inches,Weight):-
+bmi_input(Feet,Inches,Weight):-
 calculate_height(Feet,Inches,Height), % returned Height in meters.
 calculate_weight(Weight,Kilogram),  % returned weight in pounds.
 calculate_bmi(Height,Kilogram,Bmi), % returns individual calculated body mass index.
 classify_bmi(Bmi). 
+
+% next step is creae dynamic predicates
+% assert each user entry in db
+% write each assert to file
+% use backtracking effeciently to decide or not a individualis obese based on thier bmi.
+% read from file into db
+
+% build gui to extract infomation from user.
+% use jpl to process prolog commands from java
+
+
+
 
