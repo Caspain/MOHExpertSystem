@@ -3,13 +3,14 @@ package view;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
@@ -99,8 +100,7 @@ public class Main  extends Application {
 			 root.setHgap(5);
 			 root.setVgap(15);
 			 root.setPadding(new Insets(5));
-		//	 root.setAlignment(Pos.CENTER);
-			// root.setRowValignment(VPos.CENTER);
+	
 			 root.getChildren().add(query);
 			 root.getChildren().add(Field);
 			HBox queryBox = new HBox();
@@ -111,11 +111,15 @@ public class Main  extends Application {
 			  root.setId("query-root");
 			  Field.setId("field");
 			  SubmitQuery.setId("submit-query");
+			  
+			  
 			  SubmitQuery.setPrefWidth(65);
 			  
 			  SubmitQuery.setOnAction((event)->{
 				
 				  String query = getQueryText();
+				
+				  
 				  ShowQueryResponse(query);
 			  });
 		 }
@@ -129,11 +133,30 @@ public class Main  extends Application {
 				alert.setHeaderText("Information Returned");
 				alert.setContentText(query);
 				alert.show();
-
 		 }
 	 }
 	 public static class Input{
-		 
+		 public static void SetUpComponents(){
+			 GridPane root = new GridPane();
+			 Label HeightLabel,WeightLabel;
+			 
+			 Text NameText,AgeText,EthnicityText,HeightInFeetText,HeightIn_InchesText,WeightText;
+			 TextField Name,Age,Ethnicity,HeightInFeet,HeightIn_Inches,Weight;
+			 Name = Age = HeightIn_Inches = HeightInFeet = Weight= Ethnicity = new TextField();
+			 NameText = new Text("Name");
+			 AgeText = new Text("Age");
+			 Ethnicity = new TextField("Ethnicity");
+			 HeightInFeet = new TextField("Feet");
+			 HeightIn_InchesText = new Text("Inches");
+			 WeightText = new Text("Weight");
+			 
+			 HeightLabel = new Label("Height in both feet and inches");
+			 WeightLabel = new Label("Weight in Kilograms");	 
+			 
+		 }
+		 public static void SetupGui(){
+			 
+		 }
 	 }
  }
 }
