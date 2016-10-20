@@ -78,10 +78,15 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
-			Scenes.Query.SetUp();// setup
+			/*Scenes.Query.SetUp();// setup
 			this.primaryStage.setTitle("Query");
 			primaryStage.setScene(Scenes.QueryScene);
 			Scenes.QueryScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+			*/
+			Scenes.Input.SetUpComponents();
+			this.primaryStage.setTitle("Input");
+			primaryStage.setScene(Scenes.InputScene);
+			Scenes.InputScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 		});
 		return root;
 	}
@@ -138,25 +143,104 @@ public class Main  extends Application {
 	 public static class Input{
 		 public static void SetUpComponents(){
 			 GridPane root = new GridPane();
-			 Label HeightLabel,WeightLabel;
-			 
+			 /*
+			  * labels declaration
+			  */
+			 Label HeightLabel,WeightLabel,WelcomeLabel;
+			 /*
+			  * Text declarations
+			  */
+					 
 			 Text NameText,AgeText,EthnicityText,HeightInFeetText,HeightIn_InchesText,WeightText;
+			 /*
+			  * TextField declarations
+			  */
 			 TextField Name,Age,Ethnicity,HeightInFeet,HeightIn_Inches,Weight;
-			 Name = Age = HeightIn_Inches = HeightInFeet = Weight= Ethnicity = new TextField();
+			 /*
+			  * TextField instanciations
+			  */
+			          Name = new TextField(); 
+			          Age =  new TextField();;
+				      HeightIn_Inches = new TextField();
+					  HeightInFeet =  new TextField();Weight= new TextField(); 
+					  Ethnicity = new TextField();
+					  /*
+					   * Text instanciations
+					   */
 			 NameText = new Text("Name");
 			 AgeText = new Text("Age");
-			 Ethnicity = new TextField("Ethnicity");
-			 HeightInFeet = new TextField("Feet");
+			 HeightInFeetText = new Text("Feet");
+			 EthnicityText = new Text("Ethnicity");
 			 HeightIn_InchesText = new Text("Inches");
 			 WeightText = new Text("Weight");
-			 
+			/*
+			 * Label instanciations 
+			 */
 			 HeightLabel = new Label("Height in both feet and inches");
-			 WeightLabel = new Label("Weight in Kilograms");	 
-			 root =  SetupGui(root); //set up gui
+			 WeightLabel = new Label("Weight in Kilograms");	
+			 WelcomeLabel = new Label("Provide the following.");
+			 /*
+			  * gap settings
+			  */
+			 root.setHgap(5);
+			 root.setVgap(5);
+			 root.setPadding(new Insets(8));
+	/*
+	 * child additions
+	 */
+			 
+			// root.setGridLinesVisible(true); 
+			 root.add(WelcomeLabel, 0, 0,1,2);
+			 root.add(NameText, 0, 2);
+			 root.add(Name, 1, 2); 
+			 
+			 root.add(AgeText, 0, 3);
+			 root.add(Age, 1, 3);
+			 
+			 root.add(EthnicityText, 0, 4);
+			 root.add(Ethnicity, 1, 4);
+			 
+			 
+			 root.add(HeightLabel, 0, 5,2,1);
+			 root.add(HeightInFeetText, 0, 6);
+			 root.add(HeightInFeet, 1, 6);
+			 
+			 root.add(HeightIn_InchesText, 0,7);
+			 root.add(HeightIn_Inches, 1, 7);
+			 
+		
+			 /*
+			  * buttons
+			  */;
+			  
+			 Button Submit = new Button("Submit");
+			 Button Back = new Button("Back");
+			 /*
+			  * button event handlers.
+			  */
+			 Back.setOnAction((event)->{
+				 //go back to select scene
+			 });
+			 
+			 Submit.setOnAction((event)->{
+				 //store data.
+				 String age = Age.getText().toString();
+				 String name = Name.getText().toString();
+				 String weight = Weight.getText().toString();
+				 String ethnicity = Ethnicity.getText().toString();
+				 String heightInches = HeightIn_Inches.getText().toString();
+				 String heightFeet = HeightInFeet.getText().toString();
+			 });
+			 Submit.setId("submit-query");
+			 Back.setId("submit-query");
+			 root.add(new Button("Submit"), 0, 9);
+			 root.add(new Button("Back"), 1, 9);
+			 InputScene = new Scene(root,300,250);
+			  root.setId("input-root");
 			 
 		 }
 		 public static GridPane SetupGui(GridPane root){
-			 root.setGridLinesVisible(true); 
+			
 			 return root;
 		 }
 	 }
