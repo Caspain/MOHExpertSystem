@@ -152,10 +152,12 @@ public class Main  extends Application {
 			 
 			 HeightLabel = new Label("Height in both feet and inches");
 			 WeightLabel = new Label("Weight in Kilograms");	 
+			 root =  SetupGui(root); //set up gui
 			 
 		 }
-		 public static void SetupGui(){
-			 
+		 public static GridPane SetupGui(GridPane root){
+			 root.setGridLinesVisible(true); 
+			 return root;
 		 }
 	 }
  }

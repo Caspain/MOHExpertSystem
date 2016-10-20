@@ -69,4 +69,10 @@ classify_bmi(Bmi).
 
 
 
+% defines the format for user input variables
+user_name(Name).
+user_age(Age).
+user_weight(Weight).
+user_ethnicity(Origin).
+user_height(Height).
 
