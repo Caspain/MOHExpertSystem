@@ -70,6 +70,7 @@ classify_bmi(Bmi).
 
 
 % defines the format for user input variables
+% facts
 user_name(Name).
 user_age(Age).
 user_weight(Weight).
@@ -78,5 +79,11 @@ user_height(Height).
 bmi_type([obese,underweight,overweight,normalweight]).
 user_bmi_type(Type,user_name(Name)).
 
+% facts about a user
 
+user(user_name(Name),
+user_age(Age),
+user_weight(Weight),
+user_ethnicity(Origin),
+user_height(Height)).
 
