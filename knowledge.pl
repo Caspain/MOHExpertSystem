@@ -42,21 +42,30 @@ calculate_height(Feet,Inches,Height):-
  %calculate  pounds weight to kilogram.
  calculate_weight(Weight,Kilogram):- Kilogram is (Weight * 0.453592).
  
- 
+ %write to file
+ file_write(Name,Age,Origin,Type,Height,Weight):-
+		 open('expert_db.txt',write,Stream),
+		 write(Stream,
+		 user(user_bmi_type(Type,user_name(Name)),
+			user_age(Age),
+			user_weight(Weight),
+			user_ethnicity(Origin),
+			user_height(Height))),
+		 close(Stream).
  
  % bmi classification based on height(meters) and weight(pounds).
-classify_bmi(Bmi):- nl , write(Bmi),(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
+classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl , write(Bmi),(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
 Status = 'UnderWeight'; Bmi >= 18.5 ,
  Bmi =< 24.9 -> Status = 'NormalWeight';
  Bmi >= 25 , Bmi =< 29.9 -> Status = 'OverWeight'
-),nl,write(Status).
+),nl, file_write(Name,Age,Origin,Status,Height,Weight).
 
 
-bmi_input(Feet,Inches,Weight):-
+bmi_input(Feet,Inches,Weight,Name,Age,Origin):-
 calculate_height(Feet,Inches,Height), % returned Height in meters.
 calculate_weight(Weight,Kilogram),  % returned weight in pounds.
 calculate_bmi(Height,Kilogram,Bmi), % returns individual calculated body mass index.
-classify_bmi(Bmi). 
+classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). 
 
 % next step is creae dynamic predicates
 % assert each user entry in db
@@ -77,13 +86,28 @@ user_weight(Weight).
 user_ethnicity(Origin).
 user_height(Height).
 bmi_type([obese,underweight,overweight,normalweight]).
+
 user_bmi_type(Type,user_name(Name)).
 
 % facts about a user
 
-user(user_name(Name),
+user(user_bmi_type(Type,user_name(Name)),
 user_age(Age),
 user_weight(Weight),
 user_ethnicity(Origin),
 user_height(Height)).
 
+/**
+file_write(Name,Age,Weight,Origin,Height):-
+		 open('file.txt',write,Stream), 
+         write(Stream, user(user_name(Name),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl(Stream), 
+         close(Stream).
+		 
+file_write(Name,Type):-
+		 open('data.txt',write,Stream),
+		 write(Stream,user_bmi_type(Type,user_name(Name))),
+		 close(Stream).
+**/
+% inputs and test 
+test_user_data(Name,Age,Weight,Origin,Feet,Inches):-
+bmi_input(Feet,Inches,Weight,Name,Age,Origin). % calculate respective bmi classifiers.

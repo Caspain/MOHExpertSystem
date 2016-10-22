@@ -1,0 +1,1 @@
+user(user_bmi_type(UnderWeight,user_name(nick)),user_age(19),user_weight(63.50288),user_ethnicity(cuban),user_height(format(~3f,[3.0987999999999998])))
