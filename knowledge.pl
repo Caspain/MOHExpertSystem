@@ -44,17 +44,18 @@ calculate_height(Feet,Inches,Height):-
  
  %write to file
  file_write(Name,Age,Origin,Type,Height,Weight):-
+      format(atom(H),'~3f',[Height]),
 		 open('expert_db.txt',write,Stream),
 		 write(Stream,
 		 user(user_bmi_type(Type,user_name(Name)),
 			user_age(Age),
 			user_weight(Weight),
 			user_ethnicity(Origin),
-			user_height(Height))),
+			user_height(H))).
 		 close(Stream).
  
  % bmi classification based on height(meters) and weight(pounds).
-classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl , write(Bmi),(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
+classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl ,(Bmi >= 30.0 -> Status = 'Obese'; Bmi < 18.5 -> 
 Status = 'UnderWeight'; Bmi >= 18.5 ,
  Bmi =< 24.9 -> Status = 'NormalWeight';
  Bmi >= 25 , Bmi =< 29.9 -> Status = 'OverWeight'
