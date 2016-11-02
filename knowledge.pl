@@ -112,3 +112,38 @@ file_write(Name,Type):-
 % inputs and test 
 test_user_data(Name,Age,Weight,Origin,Feet,Inches):-
 bmi_input(Feet,Inches,Weight,Name,Age,Origin). % calculate respective bmi classifiers.
+riskval_age(Age,Riskval):-Age=<45->Riskval is 0;Age>=45,Age=<54->Riskval is 2;Age>=55,Age=<64->Riskval is 3
+	;Age>64->Riskval is 4.
+
+	%Assigns risk value based of whether the person has been diagnosed with high blood pressure
+
+	riskval_HB(HB,Riskval_hb):-HB==Yes->Riskval_hb is 2;HB==No->Riskval_hb is 0.
+
+	%ASSIGNS RISK VALUE BASED ON PREVIOUS DIAGONIS WITH HIGH GLUCOSE
+	riskval_HG(HG,Riskval_hg):-HG==Yes->Riskval_hg is 5;HB==No->Riskval_hg is 0.
+
+	%ASSIGNS RISK VALUE BASED ON PHYSICAL ACTIVITY
+	riskval_Exercise(Exercise,Riskval_e):-Exercise==yes->Riskval_e is 0;Exercise==No->Riskval_e is 1.
+
+	%ASSIGNS RISK VALUE BASED ON WAIST CIRCUMFERENCE
+
+        riskval_waist(Waist,Gender,Riskval_w):Gender==Male,Waist<94->Riskval_w is 0;
+	Gender==Male,Waist>=94,Waist=<102->Riskval_w is 3;Gender==Male,Waist>=102->Riskval_w is 4;
+	Gender==Female,Waist>=80,Waist=<88->Riskval_w is 3;Gender==Female,Waist>102->Riskval_w is 4;
+	Gender==Female,Waist=<94->Riskval_w is 0.
+
+	%ASSIGNS RISK VALUE BASED ON BMI
+	riskval_Bmi(Bmi,Riskval_b):-Bmi=<25->Riskval_b is 0;Bmi>=25,Bmi=<30->Riskval_b is 1;Bmi>30->Riskval_b is 3.
+
+	%ASSIGNS RISK VALUE BASED ON FAMILY HISTORY
+	riskval_Family(FHistory,Riskval_f):-FHistory==Yes->Riskval_f is 4;FHistory==No->Riskval_f is 0.
+
+	% SUM OF RISK FACTORS
+
+	total_risk(Riskval,Riskval_b,Riskval_e,Riskval_f,Riskval_hb,Riskval_hg,Riskval_w,Total):-Total is
+	(Riskval+Riskval_b+Riskval_e,Riskval_f+Riskval_hb+Riskval_hg+Riskval_w).
+
+	% CALCULATEs TOTAL RISK FATOR
+
+	risk_factor(Total,Risk):-Total<6->Risk='Low';Total>=6,Total=<10->Risk='Slightly Elevated';
+	Total>=11,Total=<13->Risk = 'Moderate';Total>=14,Total=<19->Risk='High';Total>19->Risk='VeryHigh'.
