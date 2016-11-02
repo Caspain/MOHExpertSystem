@@ -112,7 +112,9 @@ file_write(Name,Type):-
 % inputs and test 
 test_user_data(Name,Age,Weight,Origin,Feet,Inches):-
 bmi_input(Feet,Inches,Weight,Name,Age,Origin). % calculate respective bmi classifiers.
-riskval_age(Age,Riskval):-Age=<45->Riskval is 0;Age>=45,Age=<54->Riskval is 2;Age>=55,Age=<64->Riskval is 3
+	
+	% Assigns risk value based on age 
+	riskval_age(Age,Riskval):-Age=<45->Riskval is 0;Age>=45,Age=<54->Riskval is 2;Age>=55,Age=<64->Riskval is 3
 	;Age>64->Riskval is 4.
 
 	%Assigns risk value based of whether the person has been diagnosed with high blood pressure
