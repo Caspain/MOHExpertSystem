@@ -188,6 +188,13 @@ show_recommendations(Risk):-
     risk_treatment(RiskLevel, Treatments),
     write(Treatments), nl.
 
+% generate alert regarding risk levels
+generate_alert(Trigger):-
+	stat_num_records(CountAll),
+	stat_num_high_risk(CountHighRisk),
+	Percentage is (CountHighRisk / CountAll) * 100,
+	Percentage >= 75 -> Trigger is 1; Trigger is 0.
+
 %%%%% deletes all the items from the database
 %%%%% repopulates it from the file that was persisted
 load_database:-
@@ -230,7 +237,11 @@ run_program:-
     write("Welcome to the MOH Expert System."), nl,
     write("Correctly answer the following questions to get your Type 2 diabetes diagnosis."), nl, nl,
 
+    %% alert the user if number of records at high risk or above is over 75%
+    generate_alert(ShowAlert),
+    (ShowAlert == 1 -> (write("ALERT: Over 75% of database records are [HIGH/VERY HIGH] risk for Type 2 Diabetes."), nl, nl); nl),
     write("What is your gender: "), read(Gender), nl,
+
     write("What is your age: "), read(Age), nl,
     write("What is your weight(kg): "), read(Weight), nl,
     write("What is your height(m): "), read(Height), nl,
@@ -241,4 +252,3 @@ run_program:-
     write("Have you ever been found to have high blood glucose(Yes/No): "), read(HighBG), nl,
     family_history(Category),
     update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category).
-
