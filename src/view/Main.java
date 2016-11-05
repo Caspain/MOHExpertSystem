@@ -1,6 +1,8 @@
 package view;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -22,14 +24,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main  extends Application {
-	Stage primaryStage = null;
+	static Stage PrimaryStage = null;
 	
 	public static void main(String[] args){
 		launch(args);
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	this.primaryStage = primaryStage;
+	PrimaryStage = primaryStage;
 		primaryStage.setTitle("LoginMinistraion");
 		
 		GridPane root = new GridPane();
@@ -78,19 +80,9 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
-			/*Scenes.Query.SetUp();// setup
-			this.primaryStage.setTitle("Query");
-			primaryStage.setScene(Scenes.QueryScene);
-			Scenes.QueryScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
-			
-			Scenes.Input.SetUpComponents();
-			this.primaryStage.setTitle("Input");
-			primaryStage.setScene(Scenes.InputScene);
-			Scenes.InputScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
-			*/
-			this.primaryStage.setTitle("Indexer");
+			PrimaryStage.setTitle("Dex");
 			Scenes.Indexer.SetUpComponents();
-			primaryStage.setScene(Scenes.IndexerScene);
+			PrimaryStage.setScene(Scenes.IndexerScene);
 			Scenes.IndexerScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 		});
 		return root;
@@ -266,6 +258,23 @@ public class Main  extends Application {
 			 query = new Button("Query");
 			 input = new Button("Input");
 			 
+			 query.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					SwitchScene(QUERY_SCENE);
+					
+				}
+			});
+			input.setOnAction(new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent event) {
+						
+						SwitchScene(INPUT_SCENE);
+					}
+				});
+			 //-------------------------------------------------
 		     query.setId("sign-in");
 		     input.setId("sign-in");
 		     
@@ -279,5 +288,29 @@ public class Main  extends Application {
 			
 		 }
 	 }
+	 public static void SwitchScene(String scene){
+			/*
+			contains the logic to switch between scenes(input,query).
+			*/
+		 switch (scene) {
+		case QUERY_SCENE :
+			Scenes.Query.SetUp();// setup
+			PrimaryStage.setTitle("Query");
+			PrimaryStage.setScene(Scenes.QueryScene);
+			Scenes.QueryScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+			break;
+
+		case INPUT_SCENE:
+			Scenes.Input.SetUpComponents();
+			PrimaryStage.setTitle("Input");
+			PrimaryStage.setScene(Scenes.InputScene);
+			Scenes.InputScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+			break;
+		default:
+			break;
+		}
+	 }
+	 public static final String QUERY_SCENE = "QUERY-SCENE";
+	 public static final String INPUT_SCENE = "INPUT-SCENE";
  }
 }
