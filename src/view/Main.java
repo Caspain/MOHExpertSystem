@@ -244,5 +244,10 @@ public class Main  extends Application {
 			 return root;
 		 }
 	 }
+	 public static class Indexer{
+		 public static void SetUpComponents(){
+			 
+		 }
+	 }
  }
 }
