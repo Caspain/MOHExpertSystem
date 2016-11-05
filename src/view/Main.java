@@ -82,11 +82,16 @@ public class Main  extends Application {
 			this.primaryStage.setTitle("Query");
 			primaryStage.setScene(Scenes.QueryScene);
 			Scenes.QueryScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
-			*/
+			
 			Scenes.Input.SetUpComponents();
 			this.primaryStage.setTitle("Input");
 			primaryStage.setScene(Scenes.InputScene);
 			Scenes.InputScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+			*/
+			this.primaryStage.setTitle("Indexer");
+			Scenes.Indexer.SetUpComponents();
+			primaryStage.setScene(Scenes.IndexerScene);
+			Scenes.IndexerScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 		});
 		return root;
 	}
@@ -94,6 +99,7 @@ public class Main  extends Application {
  public static class Scenes {
 	 public static Scene QueryScene = null;
 	 public static Scene InputScene = null;
+	 public static Scene IndexerScene = null;
 	 
 	 public static class Query{
 		 public static Text query = new Text("Query");
@@ -246,7 +252,31 @@ public class Main  extends Application {
 	 }
 	 public static class Indexer{
 		 public static void SetUpComponents(){
+			 FlowPane root = new FlowPane();
+			 HBox container = new HBox();
+			
+			 container.setAlignment(Pos.CENTER);
+			 container.setPadding(new Insets(5));
+			 container.setSpacing(10);
+			 root.setHgap(5);
+			 root.setPadding(new Insets(10));
 			 
+			 Button query,input;
+			 
+			 query = new Button("Query");
+			 input = new Button("Input");
+			 
+		     query.setId("sign-in");
+		     input.setId("sign-in");
+		     
+			 container.getChildren().add(query);
+			 container.getChildren().add(input);
+			 
+			 root.getChildren().add(container);
+			 
+			 IndexerScene = new Scene(root,100,50);
+			 root.setId("indexer-root");
+			
 		 }
 	 }
  }
