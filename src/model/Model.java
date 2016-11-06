@@ -1,12 +1,11 @@
 package model;
 
-
+import com.ugos.jiprolog.engine.JIPEngine;
 
 public class Model {
 	public void Logic(){
-		String dir =System.getProperty("user.dir");
-		//Query q = new Query("consult",new Term[]{new Atom(dir+"/brain.pl")});
-		//System.out.println(q.hasSolution() ? " success " : "failed");
+		JIPEngine engine =new JIPEngine();
+		 engine.consultFile("C:\\Users\\remar_000.GMACHINE\\Documents\\JavaWorkSpace\\PrologMOH\\brain.pl");
 	
 	}
 }

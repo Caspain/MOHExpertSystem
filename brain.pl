@@ -1,4 +1,5 @@
-:- use_module(library(csv)).
+:-include("csv.pl").
+
 
 :- dynamic record/13.
 :- dynamic test/2.

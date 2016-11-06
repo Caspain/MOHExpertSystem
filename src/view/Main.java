@@ -1,9 +1,6 @@
 package view;
 
-import org.jpl7.Atom;
-import org.jpl7.JPL;
-import org.jpl7.Query;
-import org.jpl7.Term;
+
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -94,7 +91,7 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
-			 System.err.println( JPL.getDefaultInitArgs());
+
 			PrimaryStage.setTitle("Dex");
 			Scenes.Indexer.SetUpComponents();
 			PrimaryStage.setScene(Scenes.IndexerScene);
