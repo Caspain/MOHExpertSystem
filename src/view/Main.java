@@ -1,6 +1,8 @@
 package view;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,8 +14,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -97,6 +102,7 @@ public class Main  extends Application {
 		 public static Text query = new Text("Query");
 		 public static TextField Field = new TextField();
 		 public static Button SubmitQuery = new Button("Submit");
+		 public static Button IndexQuery = new Button("Back");
 				 
 		 public static void SetUp(){
 			 FlowPane root = new  FlowPane();
@@ -108,12 +114,16 @@ public class Main  extends Application {
 			 root.getChildren().add(Field);
 			HBox queryBox = new HBox();
 			queryBox.setAlignment(Pos.BOTTOM_LEFT);
+			queryBox.setSpacing(7);
 			queryBox.getChildren().add(SubmitQuery);
+			queryBox.getChildren().add(IndexQuery);
+			
 			root.getChildren().add(queryBox);
 			 QueryScene = new Scene(root,200,69);
 			  root.setId("query-root");
 			  Field.setId("field");
 			  SubmitQuery.setId("submit-query");
+			  IndexQuery.setId("submit-query");
 			  
 			  
 			  SubmitQuery.setPrefWidth(65);
@@ -124,6 +134,16 @@ public class Main  extends Application {
 				
 				  
 				  ShowQueryResponse(query);
+			  });
+			  /*
+			   * go back to indexer scene
+			   */
+			  IndexQuery.setOnAction((event)->{
+					
+				  PrimaryStage.setTitle("Dex");
+					Scenes.Indexer.SetUpComponents();
+					PrimaryStage.setScene(Scenes.IndexerScene);
+					Scenes.IndexerScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 			  });
 		 }
 		 public static String getQueryText(){
@@ -141,19 +161,42 @@ public class Main  extends Application {
 	 public static class Input{
 		 public static void SetUpComponents(){
 			 GridPane root = new GridPane();
+			 ScrollPane scrollPane = new ScrollPane(); //scroll pane...
+			 
+			 scrollPane.setContent(root); //add root
+			 scrollPane.setFitToHeight(true);
+			 scrollPane.setFitToWidth(false);
 			 /*
 			  * labels declaration
 			  */
-			 Label HeightLabel,WeightLabel,WelcomeLabel;
+			 Label HeightLabel,WeightLabel,WelcomeLabel,Questionslabel;
 			 /*
 			  * Text declarations
 			  */
+			 
+			 
+			 /*
+			  * radio button declarations
+			  */
+			//A radio button with an empty string for its label
+			 RadioButton yesRb1 = new RadioButton("Yes");
+			 RadioButton NoRb1 = new RadioButton("No");
 					 
+			 RadioButton yesRb2 = new RadioButton("Yes");
+			 RadioButton NoRb2 = new RadioButton("No");
+			 
+			 RadioButton yesRb3 = new RadioButton("Yes");
+			 RadioButton NoRb3 = new RadioButton("No");
+			 
+			 RadioButton yesRb4 = new RadioButton("Yes");
+			 RadioButton NoRb4 = new RadioButton("No");
+			 
 			 Text NameText,AgeText,EthnicityText,HeightInFeetText,HeightIn_InchesText,WeightText;
+			 Text WaistCircumference,Excercise,Diet,Medication,BloodPressure;
 			 /*
 			  * TextField declarations
 			  */
-			 TextField Name,Age,Ethnicity,HeightInFeet,HeightIn_Inches,Weight;
+			 TextField Name,Age,Ethnicity,HeightInFeet,HeightIn_Inches,Weight,WaistCircumferenceInput;
 			 /*
 			  * TextField instanciations
 			  */
@@ -162,33 +205,44 @@ public class Main  extends Application {
 				      HeightIn_Inches = new TextField();
 					  HeightInFeet =  new TextField();Weight= new TextField(); 
 					  Ethnicity = new TextField();
+					  WaistCircumferenceInput = new TextField();
 					  /*
 					   * Text instanciations
 					   */
+					  Excercise = new Text("Do you exercise atleast 30 minutes every day?");
+					  Diet  = new Text("Do you eat vegetables or fruits every day");
+					  Medication = new Text("Have you ever taken medication for high blood pressure on regular basis");
+					  BloodPressure = new Text("Have you ever been found to have high blood glucose");
+					  
+					  
 			 NameText = new Text("Name");
 			 AgeText = new Text("Age");
 			 HeightInFeetText = new Text("Feet");
 			 EthnicityText = new Text("Ethnicity");
 			 HeightIn_InchesText = new Text("Inches");
 			 WeightText = new Text("Weight");
+			 WaistCircumference = new Text("Waist Circumference");
+			 
 			/*
 			 * Label instanciations 
 			 */
 			 HeightLabel = new Label("Height in both feet and inches");
-			 WeightLabel = new Label("Weight in Kilograms");	
+			 WeightLabel = new Label("Weight (Kg)");	
 			 WelcomeLabel = new Label("Provide the following.");
+			 Questionslabel = new Label("Answer the following.");
+			 
 			 /*
 			  * gap settings
 			  */
-			 root.setHgap(5);
-			 root.setVgap(5);
-			 root.setPadding(new Insets(8));
+			 root.setHgap(2);
+			 root.setVgap(2);
+			 root.setPadding(new Insets(2));
 	/*
 	 * child additions
 	 */
 			 
 			// root.setGridLinesVisible(true); 
-			 root.add(WelcomeLabel, 0, 0,1,2);
+			 root.add(WelcomeLabel, 0, 0,2,1);
 			 root.add(NameText, 0, 2);
 			 root.add(Name, 1, 2); 
 			 
@@ -213,11 +267,16 @@ public class Main  extends Application {
 			  
 			 Button Submit = new Button("Submit");
 			 Button Back = new Button("Back");
+			 
 			 /*
 			  * button event handlers.
 			  */
 			 Back.setOnAction((event)->{
 				 //go back to select scene
+				 PrimaryStage.setTitle("Dex");
+					Scenes.Indexer.SetUpComponents();
+					PrimaryStage.setScene(Scenes.IndexerScene);
+					Scenes.IndexerScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 			 });
 			 
 			 Submit.setOnAction((event)->{
@@ -231,10 +290,165 @@ public class Main  extends Application {
 			 });
 			 Submit.setId("submit-query");
 			 Back.setId("submit-query");
-			 root.add(new Button("Submit"), 0, 9);
-			 root.add(new Button("Back"), 1, 9);
-			 InputScene = new Scene(root,300,250);
+			 
+			 
+			 root.add(WeightLabel, 0, 9);
+			 root.add(Weight, 1, 9);
+			 
+			 root.add(WaistCircumference, 0, 10);
+			 root.add(WaistCircumferenceInput, 1, 10);
+			 
+			 root.add(Questionslabel, 0, 11,2,1);
+			
+			 
+			 /*
+			  * Hbox for various questions
+			  */
+			 HBox question1 = new HBox();
+			 question1.setSpacing(2);
+			 question1.setAlignment(Pos.CENTER);
+			 question1.setPadding(new Insets(2));
+			 
+			 HBox question2 = new HBox();
+			 question2.setSpacing(5);
+			 question2.setAlignment(Pos.CENTER);
+			 question2.setPadding(new Insets(5));
+			 
+			 HBox question3 = new HBox();
+			 question3.setSpacing(5);
+			 question3.setAlignment(Pos.CENTER);
+			 question3.setPadding(new Insets(5));
+			 
+			 /*
+			  * question1 box with radio button
+			  */
+			 
+			 /*
+			  * define toggle group final ToggleGroup group = new ToggleGroup();
+			  */
+			 final ToggleGroup group1 = new ToggleGroup();
+			 final ToggleGroup group2 = new ToggleGroup();
+			 final ToggleGroup group3 = new ToggleGroup();
+			 final ToggleGroup group4 = new ToggleGroup();
+			 
+			 yesRb1.setToggleGroup(group1);
+			 NoRb1.setToggleGroup(group1);
+			 
+			 yesRb2.setToggleGroup(group2);
+			 NoRb2.setToggleGroup(group2);
+			 
+			 yesRb3.setToggleGroup(group3);
+			 NoRb3.setToggleGroup(group3);
+			 
+			 yesRb4.setToggleGroup(group4);
+			 NoRb4.setToggleGroup(group4);
+			 /*
+			  * adding questions
+			  * 
+			  */
+			 FlowPane f1 = new FlowPane();
+			 f1.setPrefWidth(90);
+			 f1.setHgap(5);
+			 f1.getChildren().add(yesRb1);
+			 f1.getChildren().add(NoRb1);
+			 
+			 FlowPane f2 = new FlowPane();
+			 f2.setPrefWidth(90);
+			 f2.setHgap(5);
+			 f2.getChildren().add(yesRb2);
+			 f2.getChildren().add(NoRb2);
+		
+			 
+			 FlowPane f3 = new FlowPane();
+			 f3.setPrefWidth(90);
+			 f3.setHgap(5);
+			 f3.getChildren().add(yesRb3);
+			 f3.getChildren().add(NoRb3);
+			 
+			 FlowPane f4 = new FlowPane();
+			 f4.setPrefWidth(90);
+			 f4.setHgap(5);
+			 f4.getChildren().add(yesRb4);
+			 f4.getChildren().add(NoRb4);
+			 
+			 root.add(Excercise, 0, 13);
+			 root.add( f1, 1, 13);
+			 
+			 root.add(Diet, 0, 14);
+			 root.add( f2, 1, 14);
+			
+			 root.add(Medication, 0, 15);
+			 root.add( f3, 1, 15);
+			 
+			 root.add(BloodPressure, 0, 16);
+			 root.add( f4, 1, 16);
+			 /*
+			  * 
+			  * process radio buttons toggle group
+			  */
+			 
+			 group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+				    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				                     if(group1.getSelectedToggle()!=null){
+				                    	 if(group1.getSelectedToggle().equals(yesRb1)){
+				                                       System.out.println("yes");
+				                    	 	}
+				                    	 else if(group1.getSelectedToggle().equals(NoRb1)){
+		                                       System.out.println("no");
+		                    	 	}
+				                     }
+				                     
+				        }
+				});
+			 
+			 group2.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+				    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				    	  if(group2.getSelectedToggle()!=null){
+		                    	 if(group2.getSelectedToggle().equals(yesRb2)){
+		                                       System.out.println("yes");
+		                    	 	}
+		                    	 else if(group1.getSelectedToggle().equals(NoRb2)){
+                                    System.out.println("no");
+                 	 	}
+		                     }         
+				        }
+				});
+			 
+			 group3.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+				    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				    	  if(group3.getSelectedToggle()!=null){
+		                    	 if(group3.getSelectedToggle().equals(yesRb3)){
+		                                       System.out.println("yes");
+		                    	 	}
+		                    	 else if(group3.getSelectedToggle().equals(NoRb3)){
+                                    System.out.println("no");
+                 	 	}
+		                     }   
+				        }
+				});
+			 
+			 group4.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+				    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				    	  if(group4.getSelectedToggle()!=null){
+		                    	 if(group4.getSelectedToggle().equals(yesRb4)){
+		                                       System.out.println("yes");
+		                    	 	}
+		                    	 else if(group4.getSelectedToggle().equals(NoRb4)){
+                                    System.out.println("no");
+                 	 	}
+		                     }      
+				        }
+				});
+			 InputScene = new Scene(scrollPane,300,250);
 			  root.setId("input-root");
+			 
+		 }
+		 
+		 public static void ProcessQuestions(){
 			 
 		 }
 		 public static GridPane SetupGui(GridPane root){
