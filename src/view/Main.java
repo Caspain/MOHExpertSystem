@@ -1,5 +1,10 @@
 package view;
 
+import org.jpl7.Atom;
+import org.jpl7.JPL;
+import org.jpl7.Query;
+import org.jpl7.Term;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +33,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Model;
 
 public class Main  extends Application {
 	static Stage PrimaryStage = null;
@@ -39,7 +45,9 @@ public class Main  extends Application {
 	public void start(Stage primaryStage) throws Exception {
 	PrimaryStage = primaryStage;
 		primaryStage.setTitle("LoginMinistraion");
+	   
 		
+	
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER);
 		root.setPadding(new Insets(10));
@@ -86,6 +94,7 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
+			 System.err.println( JPL.getDefaultInitArgs());
 			PrimaryStage.setTitle("Dex");
 			Scenes.Indexer.SetUpComponents();
 			PrimaryStage.setScene(Scenes.IndexerScene);
