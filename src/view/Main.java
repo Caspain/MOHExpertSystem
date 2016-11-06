@@ -46,7 +46,7 @@ public class Main  extends Application {
 	PrimaryStage = primaryStage;
 		primaryStage.setTitle("LoginMinistraion");
 	   
-		
+	
 	
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER);
