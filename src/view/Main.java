@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -161,8 +162,9 @@ public class Main  extends Application {
 	 public static class Input{
 		 public static void SetUpComponents(){
 			 GridPane root = new GridPane();
+			
 			 ScrollPane scrollPane = new ScrollPane(); //scroll pane...
-			 
+	         
 			 scrollPane.setContent(root); //add root
 			 scrollPane.setFitToHeight(true);
 			 scrollPane.setFitToWidth(false);
@@ -443,6 +445,21 @@ public class Main  extends Application {
 		                     }      
 				        }
 				});
+			 
+			 
+			 FlowPane f5 = new FlowPane();
+			 f5.setPrefWidth(40);
+			 f5.setHgap(5);
+			 f5.getChildren().add(Submit);
+			 f5.getChildren().add(Back);
+			 
+			//Horizontal separator
+			 Separator separator1 = new Separator();
+			 //Vertical separator
+			 
+			 root.add(separator1, 0, 17,2,1);
+			 root.add(f5, 0, 18); //submit button and back
+			 
 			 InputScene = new Scene(scrollPane,300,250);
 			  root.setId("input-root");
 			 
