@@ -1,4 +1,4 @@
-:-include("csv.pl").
+:-use_module(library(csv)).
 
 
 :- dynamic record/13.

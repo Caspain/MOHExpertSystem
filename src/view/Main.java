@@ -2,6 +2,18 @@ package view;
 
 
 
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.jpl7.Atom;
+import org.jpl7.Compound;
+import org.jpl7.JPL;
+import org.jpl7.Query;
+import org.jpl7.Term;
+import org.jpl7.Variable;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +42,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Model;
+//import model.Model;
 
 public class Main  extends Application {
 	static Stage PrimaryStage = null;
@@ -91,7 +103,34 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
+         // Model m = new Model();
+        //  m.Logic();
+			Query q1 = 
+				    new Query( 
+				        "consult", 
+				        new Term[] {new Atom("C:\\Users\\remar_000.GMACHINE\\Documents\\JavaWorkSpace\\PrologMOH\\brain.pl")} 
+				    );
+			
+			System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
+		
+	
+/*			 org.jpl7.Integer age = new org.jpl7.Integer(5);
+			 org.jpl7.Integer feet = new org.jpl7.Integer(5);
+			 org.jpl7.Integer inches = new org.jpl7.Integer(7);
+			 
+			
+			Term q2 = new Compound("test_user_data", new Term[]{new Atom("nicsdk"),age,new org.jpl7.Integer(150),new Atom("jamaican"),feet,inches});
+			Query q3 = new Query(q2 );
+		
+           q3.open();
+           if (q3.hasMoreElements()) {
+			Object c = q3.nextElement();
+			System.out.println( "query " + (c.toString()));
+		}*/
+			
 
+			
+			
 			PrimaryStage.setTitle("Dex");
 			Scenes.Indexer.SetUpComponents();
 			PrimaryStage.setScene(Scenes.IndexerScene);
