@@ -1,34 +1,54 @@
-/*package model;
+package model;
 
-import com.ugos.jiprolog.engine.JIPEngine;
-import com.ugos.jiprolog.engine.JIPQuery;
-import com.ugos.jiprolog.engine.JIPTerm;
-import com.ugos.jiprolog.engine.JIPTermParser;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
+import org.jpl7.Atom;
+import org.jpl7.Compound;
+import org.jpl7.Query;
+import org.jpl7.Term;
+import org.jpl7.Variable;
 
 public class Model {
-	public void Logic(){
-		try{
-		JIPEngine engine =new JIPEngine();
-		JIPTerm query = null;
-		 engine.consultFile("C:\\Users\\remar_000.GMACHINE\\Documents\\JavaWorkSpace\\PrologMOH\\read.pl");
-		 JIPTermParser termParser = engine.getTermParser();
-		 
-		query =  termParser.parseTerm("main.");
-		// open a synchronous query
-		JIPQuery jipQuery = engine.openSynchronousQuery(query);
-		JIPTerm solution;
 
-		// Loop while there is another solution
-		while (jipQuery.hasMoreChoicePoints())
-		{
-		    solution = jipQuery.nextSolution();
-		    if(solution!=null)
-		    System.out.println(solution );
-		}
+	public void consultDb(){
+		String file = (System.getProperty("user.dir")+"\\brain.pl");
+		Query q1 = 
+			    new Query( 
+			        "consult", 
+			        new Term[] {new Atom(file)} 
+			    );
 		
-		}catch(Exception ex){
-			System.out.println(ex.getMessage());
+		System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
+	}
+	public Model(){
+		consultDb();
+	}
+	public static class Logicain{
+		public static HashMap<String, Object> map=null;
+		
+		public static void getData(HashMap<String, Object> n){
+			map = n;
+		}
+		public static void Trigger( String age,String gender, String name,String weight, String ethnicity, String heightInches, String heightFeet, String waistCircumference,
+				boolean tog1,boolean tog2,boolean tog3,boolean tog4){
+		
+			
 		}
 	}
+	public  void AlertAuthoritiesOfSpike(){
+		Variable X = new Variable("Trigger");
+		Term q2 = new Compound("generate_alert", new Term[]{new Variable("Trigger")});
+		Query q3 = new Query(q2 );
+		
+	    q3.open();
+        if (q3.hasMoreElements()) {
+			Object c = q3.nextElement();
+			System.out.println(  (c));
+		}
+      
+				
+	}
+	
 }
-*/

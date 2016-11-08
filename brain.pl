@@ -24,12 +24,12 @@ could assist the MOH in its efforts
 underweight([18.5]). % below 
 normalweight([18.5,24.9]). % over and less than 24.9
 overweight([25,29.9]) . % 25 - 29.9	Overweight
-obese(30.0). % over 30
+obese([30.0]). % over 30
 
 
 % BMI Calculations
 % bmi rules
-printHeight(Height):- write("Height in meters =  "), nl,(format('~3f',[Height])),classify_bmi(Height).
+% printHeight(Height):- write("Height in meters =  "), nl,(format('~3f',[Height])),classify_bmi(Height).
 
 convertToM(CalcMeters,Height):- CalcM is (CalcMeters / 100),Height is CalcM .
 
@@ -47,15 +47,17 @@ calculate_height(Feet,Inches,Height):-
  
  %write to file
  file_write(Name,Age,Origin,Type,Height,Weight):-
-     % format(atom(H),'~3f',[Height]),
-		 open('expert_db.txt',write,Stream),
+      format(atom(H),'~3f',[Height]),
+		 open('expert_db.txt',append,Stream),
 		 write(Stream,
 		 user(user_bmi_type(Type,user_name(Name)),
 			user_age(Age),
 			user_weight(Weight),
 			user_ethnicity(Origin),
-			user_height(Height))),
+			user_height(Height))),nl(Stream),
+			      
 		 close(Stream).
+		
  
  % bmi classification based on height(meters) and weight(pounds).
 classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl ,(
@@ -73,17 +75,10 @@ calculate_weight(Weight,Kilogram),  % returned weight in pounds.
 calculate_bmi(Height,Kilogram,Bmi), % returns individual calculated body mass index.
 % intercept shervain files here
 format(atom(H),'~3f',[Height]), % up to three decimal places...
-update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category,Bmi).
-% classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). later you can persist
+update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category,Bmi),
+classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
 
-% next step is creae dynamic predicates
-% assert each user entry in db
-% write each assert to file
-% use backtracking effeciently to decide or not a individualis obese based on thier bmi.
-% read from file into db
 
-% build gui to extract infomation from user.
-% use jpl to process prolog commands from java
 
 
 
@@ -308,7 +303,7 @@ show_recommendations(Risk):-
 generate_alert(Trigger):-
 	stat_num_records(CountAll),
 	stat_num_high_risk(CountHighRisk),
-	Percentage is (CountHighRisk / CountAll) * 100,
+	(CountAll == 0 -> Percentage is 0; Percentage is (CountHighRisk / CountAll) * 100),
 	Percentage >= 75 -> Trigger is 1; Trigger is 0.
 
 %%%%% deletes all the items from the database
@@ -377,7 +372,7 @@ run_program:-
     family_history(Category),
     update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category).
 */
-engine:-
+engine(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
 % prompt user for input
     test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category).
 	

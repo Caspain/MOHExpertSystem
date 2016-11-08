@@ -39,9 +39,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Model;
 //import model.Model;
 
 public class Main  extends Application {
+	public static Model model = new Model();
 	static Stage PrimaryStage = null;
 	
 	public static void main(String[] args){
@@ -52,8 +54,6 @@ public class Main  extends Application {
 	PrimaryStage = primaryStage;
 		primaryStage.setTitle("LoginMinistraion");
 	   
-	
-	
 		GridPane root = new GridPane();
 		root.setAlignment(Pos.CENTER);
 		root.setPadding(new Insets(10));
@@ -100,15 +100,9 @@ public class Main  extends Application {
 		
 		
 		btn.setOnAction((event)->{
-         // Model m = new Model();
-        //  m.Logic();
-			Query q1 = 
-				    new Query( 
-				        "consult", 
-				        new Term[] {new Atom("C:\\Users\\remar_000.GMACHINE\\Documents\\JavaWorkSpace\\PrologMOH\\brain.pl")} 
-				    );
+		
+	         
 			
-			System.out.println( "consult " + (q1.hasSolution() ? "succeeded" : "failed"));
 		
 	
 /*			 org.jpl7.Integer age = new org.jpl7.Integer(5);
@@ -125,9 +119,8 @@ public class Main  extends Application {
 			System.out.println( "query " + (c.toString()));
 		}*/
 			
-
-			
-			
+             
+			model.AlertAuthoritiesOfSpike();
 			PrimaryStage.setTitle("Dex");
 			Scenes.Indexer.SetUpComponents();
 			PrimaryStage.setScene(Scenes.IndexerScene);
@@ -202,6 +195,12 @@ public class Main  extends Application {
 		 }
 	 }
 	 public static class Input{
+		 public static boolean toggle1 = false; //this indicates wether yes or no (true | false)
+		 public static boolean toggle2 = false;
+		 public static boolean toggle3 = false;
+		 public static boolean toggle4 = false;
+		 
+		 
 		 public static void SetUpComponents(){
 			 GridPane root = new GridPane();
 			
@@ -331,6 +330,7 @@ public class Main  extends Application {
 				 String ethnicity = Ethnicity.getText().toString();
 				 String heightInches = HeightIn_Inches.getText().toString();
 				 String heightFeet = HeightInFeet.getText().toString();
+				 String waistCircumference = WaistCircumferenceInput.getText().toString();
 			 });
 			 Submit.setId("submit-query");
 			 Back.setId("submit-query");
@@ -377,15 +377,19 @@ public class Main  extends Application {
 			 
 			 yesRb1.setToggleGroup(group1);
 			 NoRb1.setToggleGroup(group1);
+			 NoRb1.setSelected(true);
 			 
 			 yesRb2.setToggleGroup(group2);
 			 NoRb2.setToggleGroup(group2);
+			 NoRb2.setSelected(true);
 			 
 			 yesRb3.setToggleGroup(group3);
 			 NoRb3.setToggleGroup(group3);
+			 NoRb3.setSelected(true);
 			 
 			 yesRb4.setToggleGroup(group4);
 			 NoRb4.setToggleGroup(group4);
+			 NoRb4.setSelected(true);
 			 /*
 			  * adding questions
 			  * 
@@ -436,10 +440,10 @@ public class Main  extends Application {
 				        Toggle old_toggle, Toggle new_toggle) {
 				                     if(group1.getSelectedToggle()!=null){
 				                    	 if(group1.getSelectedToggle().equals(yesRb1)){
-				                                       System.out.println("yes");
+				                                     toggle1 = true;
 				                    	 	}
 				                    	 else if(group1.getSelectedToggle().equals(NoRb1)){
-		                                       System.out.println("no");
+		                                        toggle1=false; //then no was checked
 		                    	 	}
 				                     }
 				                     
@@ -451,10 +455,10 @@ public class Main  extends Application {
 				        Toggle old_toggle, Toggle new_toggle) {
 				    	  if(group2.getSelectedToggle()!=null){
 		                    	 if(group2.getSelectedToggle().equals(yesRb2)){
-		                                       System.out.println("yes");
+		                    		 toggle2 = true;
 		                    	 	}
 		                    	 else if(group1.getSelectedToggle().equals(NoRb2)){
-                                    System.out.println("no");
+		                    		 toggle2 = false;
                  	 	}
 		                     }         
 				        }
@@ -465,10 +469,10 @@ public class Main  extends Application {
 				        Toggle old_toggle, Toggle new_toggle) {
 				    	  if(group3.getSelectedToggle()!=null){
 		                    	 if(group3.getSelectedToggle().equals(yesRb3)){
-		                                       System.out.println("yes");
+		                    		 toggle3 = true;
 		                    	 	}
 		                    	 else if(group3.getSelectedToggle().equals(NoRb3)){
-                                    System.out.println("no");
+		                    		 toggle3 = false;
                  	 	}
 		                     }   
 				        }
@@ -479,10 +483,10 @@ public class Main  extends Application {
 				        Toggle old_toggle, Toggle new_toggle) {
 				    	  if(group4.getSelectedToggle()!=null){
 		                    	 if(group4.getSelectedToggle().equals(yesRb4)){
-		                                       System.out.println("yes");
+		                    		 toggle4 = true;
 		                    	 	}
 		                    	 else if(group4.getSelectedToggle().equals(NoRb4)){
-                                    System.out.println("no");
+		                    		 toggle4 = false;
                  	 	}
 		                     }      
 				        }

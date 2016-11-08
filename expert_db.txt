@@ -1,1 +1,2 @@
-user(user_bmi_type(NormalWeight,user_name(nicsdk)),user_age(5),user_weight(68.0388),user_ethnicity(jamaican),user_height(1.7018))
+user(user_bmi_type(NormalWeight,user_name(jlk)),user_age(21),user_weight(65.77083999999999),user_ethnicity(cuban),user_height(1.651))
+user(user_bmi_type(NormalWeight,user_name(jnick)),user_age(21),user_weight(65.77083999999999),user_ethnicity(cuban),user_height(1.651))
