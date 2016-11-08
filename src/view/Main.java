@@ -30,7 +30,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -199,6 +201,7 @@ public class Main  extends Application {
 		 public static boolean toggle2 = false;
 		 public static boolean toggle3 = false;
 		 public static boolean toggle4 = false;
+		 public static String category ="r1"; //for category 1,2,3
 		 
 		 
 		 public static void SetUpComponents(){
@@ -331,6 +334,8 @@ public class Main  extends Application {
 				 String heightInches = HeightIn_Inches.getText().toString();
 				 String heightFeet = HeightInFeet.getText().toString();
 				 String waistCircumference = WaistCircumferenceInput.getText().toString();
+				 
+				 Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category);
 			 });
 			 Submit.setId("submit-query");
 			 Back.setId("submit-query");
@@ -503,8 +508,60 @@ public class Main  extends Application {
 			 Separator separator1 = new Separator();
 			 //Vertical separator
 			 
+			 
 			 root.add(separator1, 0, 17,2,1);
-			 root.add(f5, 0, 18); //submit button and back
+			 
+			 root.add(new Label("Previous History"), 0, 18,2,1);
+			 
+			 root.add(new Text("Have any of the members of your immediate family or other"),0 , 19,2,1);
+			 root.add(new Text("relatives been diagnosed with diabetes (type 1 or type 2) ?"),0 , 20,2,1);
+			 root.add(new Text("Select a category from the list below:"),0 , 21,2,1);
+			 
+			 
+			 RadioButton r1,r2,r3;
+			 r1= new RadioButton("No");
+			 r2 = new RadioButton("Yes");
+			 r3 = new RadioButton("Yes");
+			 
+			 r2.setTooltip(new Tooltip("(grandparent, aunt, uncle or cousins)"));
+
+			 r3.setTooltip(new Tooltip("(parent, sibling, child)"));
+			 
+			 ToggleGroup tr1;
+			 
+			 tr1 = new ToggleGroup();
+			r1.setSelected(true);
+			r1.setToggleGroup(tr1);
+			r2.setToggleGroup(tr1);
+			r3.setToggleGroup(tr1);
+			
+			tr1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+					if(tr1.getSelectedToggle()!=null){
+						if(tr1.getSelectedToggle().equals(r1)){
+							category="r1";
+						}
+						else if(tr1.getSelectedToggle().equals(r2)){
+							category="r2";
+						}else{
+							//then r3
+							category="r3";
+						}
+					}
+					
+				}
+			});
+			 FlowPane f6 = new FlowPane();
+			// f5.setPrefWidth(100);
+			 f6.setHgap(10);
+			 f6.getChildren().addAll(r1,r2,r3);
+			 root.add(f6, 0, 22);
+				//Horizontal separator
+			 Separator sep = new Separator();
+				root.add(sep, 0, 23,2,1); //submit button and back
+			root.add(f5, 0, 24,2,1); //submit button and back
 			 
 			 InputScene = new Scene(scrollPane,300,250);
 			  root.setId("input-root");
