@@ -206,6 +206,7 @@ public class Main  extends Application {
 		 public static boolean toggle3 = false;
 		 public static boolean toggle4 = false;
 		 public static String category ="r1"; //for category 1,2,3
+		protected static String user_gender;
 		 
 		 
 		 public static void SetUpComponents(){
@@ -340,7 +341,7 @@ public class Main  extends Application {
 				 String waistCircumference = WaistCircumferenceInput.getText().toString();
 				 
 				
-				 Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category); //display scene
+				 Model.Trigger(age, user_gender, name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category); //display scene
 		         DisplayRecomendations("");//display
 			 });
 			 Submit.setId("submit-query");
@@ -567,8 +568,41 @@ public class Main  extends Application {
 				//Horizontal separator
 			 Separator sep = new Separator();
 				root.add(sep, 0, 23,2,1); //submit button and back
-			root.add(f5, 0, 24,2,1); //submit button and back
+			root.add(f5, 0, 26,2,1); //submit button and back
+			
+			 RadioButton male = new RadioButton("M");
+			 RadioButton female = new RadioButton("F");
 			 
+			 ToggleGroup genderGroup = new ToggleGroup();
+			 male.setToggleGroup(genderGroup);
+			 female.setToggleGroup(genderGroup);
+			 Label genderLabel = new Label("Gender");
+			 
+			 FlowPane genderFlow = new FlowPane();
+			 genderFlow.setPadding(new Insets(5));
+			 HBox GenderBox = new HBox();
+			 GenderBox.setSpacing(10);
+			 GenderBox.getChildren().addAll(genderLabel,male,female);
+			 
+			 //handle click for gender
+			 genderGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+			         if(genderGroup.getSelectedToggle()!=null){
+			        	 if(genderGroup.getSelectedToggle().equals(male)){
+			        		 user_gender="male";
+			        	 }
+			        	 else if(genderGroup.getSelectedToggle().equals(female)){
+			        		 user_gender="female";
+			        	 }
+			         }
+					
+				}
+			});
+			 genderFlow.getChildren().addAll(GenderBox);
+			 root.add(new Separator(),0,25,2,1);
+			 root.add(genderFlow, 0, 24,2,1);
 			 InputScene = new Scene(scrollPane,300,250);
 			  root.setId("input-root");
 			 
@@ -677,19 +711,24 @@ public class Main  extends Application {
 			Text head1 = new Text("Strength Training");
 			Text head2 = new Text("Aerobic Exercise");
 			
+			head1.setWrappingWidth(287);
+			
 			Label label1 = new Label();
 			label1.setTextAlignment(TextAlignment.LEFT);
 			label1.setWrapText(true);
 			Label label2 = new Label();
 			
-			label2.setTextAlignment(TextAlignment.LEFT);
+			label2.setTextAlignment(TextAlignment.CENTER);
 			label2.setWrapText(true);
-			label2.setText("Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
+			label2.setText("Strength Training");
+			head1.setText("Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
 			
-			Button back = new Button("Back");
+			Button back = new Button(" < Back");
+			Separator line1 = new Separator();
 			
 			child.getChildren().add(head1);
 			child.getChildren().add(label2);
+			child.getChildren().add(line1);
 			child.getChildren().add(back);
 			
 			back.setOnAction(new EventHandler<ActionEvent>() {
