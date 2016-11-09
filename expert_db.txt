@@ -12,3 +12,7 @@ user(user_bmi_type(NormalWeight,user_name(sam)),user_age(21),user_weight(65.7708
 user(user_bmi_type(NormalWeight,user_name(ds)),user_age(23),user_weight(59.874144),user_ethnicity(cuban),user_height(1.6256))
 user(user_bmi_type(NormalWeight,user_name(curl)),user_age(30),user_weight(73.935496),user_ethnicity(cuban),user_height(1.7526))
 user(user_bmi_type(OverWeight,user_name(rema)),user_age(40),user_weight(70.30676),user_ethnicity(cuabn),user_height(1.6764000000000001))
+user(user_bmi_type(Obese,user_name(fio)),user_age(27),user_weight(74.84268),user_ethnicity(jam),user_height(1.422))
+user(user_bmi_type(Obese,user_name(fio)),user_age(27),user_weight(74.84268),user_ethnicity(jam),user_height(1.422))
+user(user_bmi_type(NormalWeight,user_name(loi)),user_age(30),user_weight(68.0388),user_ethnicity(mexican),user_height(1.753))
+user(user_bmi_type(NormalWeight,user_name(john)),user_age(20),user_weight(72.121128),user_ethnicity(caymanian),user_height(1.854))

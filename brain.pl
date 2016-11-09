@@ -54,7 +54,7 @@ calculate_height(Feet,Inches,Height):-
 			user_age(Age),
 			user_weight(Weight),
 			user_ethnicity(Origin),
-			user_height(Height))),nl(Stream),
+			user_height(H))),nl(Stream),
 			      
 		 close(Stream).
 		

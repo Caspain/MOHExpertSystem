@@ -38,9 +38,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.Model;
 //import model.Model;
@@ -338,7 +340,8 @@ public class Main  extends Application {
 				 String waistCircumference = WaistCircumferenceInput.getText().toString();
 				 
 				
-				 SwitchScene(RECOMENDATION_SCENE, Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category)); //display scene
+				 Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category); //display scene
+		         DisplayRecomendations("");//display
 			 });
 			 Submit.setId("submit-query");
 			 Back.setId("submit-query");
@@ -649,8 +652,8 @@ public class Main  extends Application {
 			break;
 			
 		case RECOMENDATION_SCENE:
-			Scenes.RecomendationScene  = new Scene(root,300,300);
-			PrimaryStage.setTitle("Results");
+			Scenes.RecomendationScene  = new Scene(root,290,200);
+			PrimaryStage.setTitle("Recomendations");
 			PrimaryStage.setScene(Scenes.RecomendationScene);
 			Scenes.RecomendationScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 			break;
@@ -658,6 +661,54 @@ public class Main  extends Application {
 			break;
 		}
 	 }
+		public static ScrollPane DisplayRecomendations(String result){
+			ScrollPane root = new ScrollPane();
+			root.setFitToWidth(true);
+			root.setFitToHeight(false);
+			
+			VBox child = new VBox();
+			child.setPadding(new Insets(5));
+			child.setSpacing(5);
+			
+			root.setContent(child);//set child
+			
+			child.setAlignment(Pos.CENTER_LEFT);
+			
+			Text head1 = new Text("Strength Training");
+			Text head2 = new Text("Aerobic Exercise");
+			
+			Label label1 = new Label();
+			label1.setTextAlignment(TextAlignment.LEFT);
+			label1.setWrapText(true);
+			Label label2 = new Label();
+			
+			label2.setTextAlignment(TextAlignment.LEFT);
+			label2.setWrapText(true);
+			label2.setText("Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
+			
+			Button back = new Button("Back");
+			
+			child.getChildren().add(head1);
+			child.getChildren().add(label2);
+			child.getChildren().add(back);
+			
+			back.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					// go back indexer
+					
+					     PrimaryStage.setTitle("Dex");
+						Scenes.Indexer.SetUpComponents();
+						PrimaryStage.setScene(Scenes.IndexerScene);
+						Scenes.IndexerScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+				}
+			});
+			SwitchScene(RECOMENDATION_SCENE, root);
+		
+			return root;
+			
+		}
 	 public static boolean Recomendation_Back  =false;
 	 public static final String QUERY_SCENE = "QUERY-SCENE";
 	 public static final String INPUT_SCENE = "INPUT-SCENE";
