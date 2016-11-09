@@ -37,6 +37,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -135,6 +136,7 @@ public class Main  extends Application {
 	 public static Scene QueryScene = null;
 	 public static Scene InputScene = null;
 	 public static Scene IndexerScene = null;
+	 public static Scene RecomendationScene = null;
 	 
 	 public static class Query{
 		 public static Text query = new Text("Query");
@@ -267,7 +269,7 @@ public class Main  extends Application {
 			 EthnicityText = new Text("Ethnicity");
 			 HeightIn_InchesText = new Text("Inches");
 			 WeightText = new Text("Weight");
-			 WaistCircumference = new Text("Waist Circumference");
+			 WaistCircumference = new Text("Waist Circumference(cm)");
 			 
 			/*
 			 * Label instanciations 
@@ -335,7 +337,8 @@ public class Main  extends Application {
 				 String heightFeet = HeightInFeet.getText().toString();
 				 String waistCircumference = WaistCircumferenceInput.getText().toString();
 				 
-				 Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category);
+				
+				 SwitchScene(RECOMENDATION_SCENE, Model.Trigger(age, "male", name, weight, ethnicity, heightInches, heightFeet, waistCircumference, toggle1, toggle2, toggle3, toggle4, category)); //display scene
 			 });
 			 Submit.setId("submit-query");
 			 Back.setId("submit-query");
@@ -568,7 +571,9 @@ public class Main  extends Application {
 			 
 		 }
 		 
-		 public static void ProcessQuestions(){
+	
+
+		public static void ProcessQuestions(){
 			 
 		 }
 		 public static GridPane SetupGui(GridPane root){
@@ -596,7 +601,7 @@ public class Main  extends Application {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					SwitchScene(QUERY_SCENE);
+					SwitchScene(QUERY_SCENE,null);
 					
 				}
 			});
@@ -605,7 +610,7 @@ public class Main  extends Application {
 					@Override
 					public void handle(ActionEvent event) {
 						
-						SwitchScene(INPUT_SCENE);
+						SwitchScene(INPUT_SCENE,null);
 					}
 				});
 			 //-------------------------------------------------
@@ -622,10 +627,12 @@ public class Main  extends Application {
 			
 		 }
 	 }
-	 public static void SwitchScene(String scene){
+	 public static void SwitchScene(String scene,ScrollPane root){
+		 
 			/*
 			contains the logic to switch between scenes(input,query).
 			*/
+			System.out.println("setting scene...");
 		 switch (scene) {
 		case QUERY_SCENE :
 			Scenes.Query.SetUp();// setup
@@ -640,11 +647,20 @@ public class Main  extends Application {
 			PrimaryStage.setScene(Scenes.InputScene);
 			Scenes.InputScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
 			break;
+			
+		case RECOMENDATION_SCENE:
+			Scenes.RecomendationScene  = new Scene(root,300,300);
+			PrimaryStage.setTitle("Results");
+			PrimaryStage.setScene(Scenes.RecomendationScene);
+			Scenes.RecomendationScene.getStylesheets().add (Main.class.getResource("Styles.css").toExternalForm());
+			break;
 		default:
 			break;
 		}
 	 }
+	 public static boolean Recomendation_Back  =false;
 	 public static final String QUERY_SCENE = "QUERY-SCENE";
 	 public static final String INPUT_SCENE = "INPUT-SCENE";
+	 public static final String RECOMENDATION_SCENE = "RECOMENDATION-SCENE";
  }
 }
