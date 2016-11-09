@@ -8,19 +8,27 @@ javafx for gui.
 steps. 
 
 install swipl (make sure the bit version(64|32) matches your system(jvm as well).
-acquire jpl.jar from C:\Program Files\swipl\bin
+acquire jpl.jar from C:\Program Files\swipl\bin (64 bit)
+acquire jpl.jar from C:\Program Files(86)\swipl\bin (32 bit)
 
-add to build path in project.
+add jar to build path in project.
 
 next steps include path environment variables.
-
-= > 
+for 64 bit systems.
 C:\Program Files\Java\jdk1.8.0_73\jre\bin\server
 
 C:\Program Files\swipl\bin
 
 C:\Program Files\swipl\lib\jpl.jar
+---------------------------------------------------
 
-refresh and your project.
+for 64 bit systems.
+C:\Program Files(86)\Java\jdk1.8.0_73\jre\bin\server
+
+C:\Program Files(86)\swipl\bin
+
+C:\Program Files(86)\swipl\lib\jpl.jar
+
+refresh your project.
 
 Happy coding.
