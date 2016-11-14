@@ -125,12 +125,41 @@ public class Main extends Application {
 			 * q3.nextElement(); System.out.println( "query " + (c.toString()));
 			 * }
 			 */
+			String user_password  =Password.getText().toString();
+			String user = userNameField.getText().toString();
+			if(user.toLowerCase().equals("admin") && user_password.toLowerCase().equals("admin")){
+				Alert alert = new Alert(AlertType.CONFIRMATION);
 
-			model.AlertAuthoritiesOfSpike();
-			PrimaryStage.setTitle("Dex");
-			Scenes.Indexer.SetUpComponents();
-			PrimaryStage.setScene(Scenes.IndexerScene);
-			Scenes.IndexerScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
+				alert.setTitle("Login Response");
+				alert.setHeaderText("Success");
+				alert.setContentText("Welcome administrator");
+				alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true); //disable cancel button
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK){
+					model.AlertAuthoritiesOfSpike();
+					PrimaryStage.setTitle("Dex");
+					Scenes.Indexer.SetUpComponents();
+					PrimaryStage.setScene(Scenes.IndexerScene);
+					Scenes.IndexerScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
+				} else {
+				    // ... user chose CANCEL or closed the dialog
+				}
+			}else{
+				Alert alert = new Alert(AlertType.ERROR);
+
+				alert.setTitle("Login Response");
+				alert.setHeaderText("Error");
+				alert.setContentText("Incorrect username | password");
+				//alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true); //disable cancel button
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK){
+					
+				}
+			
+			}
+
+			
+
 		});
 		return root;
 	}

@@ -124,10 +124,8 @@ public class Model {
 
 	public void AlertAuthoritiesOfSpike() {
 		Variable X = new Variable("Trigger");
-
 		Term q2 = new Compound("generate_alert", new Term[] { new Variable("Trigger") });
 		Query q3 = new Query(q2);
-
 		q3.open();
 		if (q3.hasMoreElements()) {
 			Object c = q3.nextElement();
