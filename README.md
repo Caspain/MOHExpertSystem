@@ -34,5 +34,8 @@ C:\Program Files(86)\swipl\bin.
 C:\Program Files(86)\swipl\lib\jpl.jar
 
 refresh your project.
-
+ --basic login credentials
+ password = admin
+ user = admin
+ 
 Happy coding.
