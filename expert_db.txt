@@ -17,3 +17,5 @@ user(user_bmi_type(Obese,user_name(fio)),user_age(27),user_weight(74.84268),user
 user(user_bmi_type(NormalWeight,user_name(loi)),user_age(30),user_weight(68.0388),user_ethnicity(mexican),user_height(1.753))
 user(user_bmi_type(NormalWeight,user_name(john)),user_age(20),user_weight(72.121128),user_ethnicity(caymanian),user_height(1.854))
 user(user_bmi_type(OverWeight,user_name(nemis)),user_age(30),user_weight(74.84268),user_ethnicity(jam),user_height(1.651))
+user(user_bmi_type(UnderWeight,user_name(samueal)),user_age(44),user_weight(64.410064),user_ethnicity(mexican),user_height(1.930))
+user(user_bmi_type(NormalWeight,user_name(drack)),user_age(23),user_weight(65.77083999999999),user_ethnicity(jan),user_height(1.676))

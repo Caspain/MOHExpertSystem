@@ -125,40 +125,39 @@ public class Main extends Application {
 			 * q3.nextElement(); System.out.println( "query " + (c.toString()));
 			 * }
 			 */
-			String user_password  =Password.getText().toString();
+			String user_password = Password.getText().toString();
 			String user = userNameField.getText().toString();
-			if(user.toLowerCase().equals("admin") && user_password.toLowerCase().equals("admin")){
+			if (user.toLowerCase().equals("admin") && user_password.toLowerCase().equals("admin")) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 
 				alert.setTitle("Login Response");
 				alert.setHeaderText("Success");
 				alert.setContentText("Welcome administrator");
-				alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true); //disable cancel button
+				alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true); // disable
+																						// cancel
+																						// button
 				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK){
+				if (result.get() == ButtonType.OK) {
 					model.AlertAuthoritiesOfSpike();
 					PrimaryStage.setTitle("Dex");
 					Scenes.Indexer.SetUpComponents();
 					PrimaryStage.setScene(Scenes.IndexerScene);
 					Scenes.IndexerScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
-				} else {
-				    // ... user chose CANCEL or closed the dialog
 				}
-			}else{
+			} else {
 				Alert alert = new Alert(AlertType.ERROR);
 
 				alert.setTitle("Login Response");
 				alert.setHeaderText("Error");
 				alert.setContentText("Incorrect username | password");
-				//alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true); //disable cancel button
+				// alert.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true);
+				// //disable cancel button
 				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK){
-					
-				}
-			
-			}
+				if (result.get() == ButtonType.OK) {
 
-			
+				}
+
+			}
 
 		});
 		return root;
@@ -622,7 +621,7 @@ public class Main extends Application {
 				genderFlow.getChildren().addAll(GenderBox);
 				root.add(new Separator(), 0, 25, 2, 1);
 				root.add(genderFlow, 0, 24, 2, 1);
-				InputScene = new Scene(scrollPane, 300, 250);
+				InputScene = new Scene(scrollPane, 570, 300);
 				root.setId("input-root");
 
 			}
@@ -730,27 +729,38 @@ public class Main extends Application {
 
 			child.setAlignment(Pos.CENTER_LEFT);
 
-			Text head1 = new Text("Strength Training");
-			Text head2 = new Text("Aerobic Exercise");
+			Text strengthTraining = new Text();
+			Text aerobic_Exercise = new Text();
 
-			head1.setWrappingWidth(287);
-
-			Label label1 = new Label();
-			label1.setTextAlignment(TextAlignment.LEFT);
+			strengthTraining.setWrappingWidth(287);
+			aerobic_Exercise.setWrappingWidth(287);  
+			
+			Label label1 = new Label("Aerobic Exercise");
+			label1.setTextAlignment(TextAlignment.CENTER);
 			label1.setWrapText(true);
+			
 			Label label2 = new Label();
-
 			label2.setTextAlignment(TextAlignment.CENTER);
 			label2.setWrapText(true);
 			label2.setText("Strength Training");
-			head1.setText(
-					"Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
-
+			
+			strengthTraining.setText("Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
+            aerobic_Exercise.setText("Aerobic exercise helps your body use insulin better. It makes your heart and bones strong, relieves stress, improves blood circulation, and reduces your risk for heart disease by lowering blood glucose and blood pressure and improving cholesterol levels. Recommend: Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising");
 			Button back = new Button(" < Back");
 			Separator line1 = new Separator();
+			Separator line2 = new Separator();
 
-			child.getChildren().add(head1);
+			//strength training
 			child.getChildren().add(label2);
+			child.getChildren().add(strengthTraining);
+			child.getChildren().add(line2);
+			
+			//"Aerobic Exercise"
+			child.getChildren().add(label1);
+			child.getChildren().add(aerobic_Exercise);
+			
+			
+			//////////----------------------------------back navigation---------------------------------
 			child.getChildren().add(line1);
 			child.getChildren().add(back);
 
@@ -778,8 +788,7 @@ public class Main extends Application {
 			alert.setTitle("Query Response");
 			alert.setHeaderText("Information Returned");
 			alert.setContentText(query);
-			ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
-			alert.getDialogPane().getButtonTypes().add(buttonTypeOk);
+			
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
 			
