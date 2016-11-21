@@ -19,19 +19,20 @@ next steps include path environment variables.
 
 for 64 bit systems.
 
-C:\Program Files\Java\your_jdk_version\jre\bin\server.
+1 = > C:\Program Files\Java\your_jdk_version\jre\bin\server.
 
-C:\Program Files\swipl\bin.
+2 = >C:\Program Files\swipl\bin.
 
-C:\Program Files\swipl\lib\jpl.jar.
+3 = > C:\Program Files\swipl\lib\jpl.jar.
 ---------------------------------------------------
 
 for 32 bit systems.
-C:\Program Files(86)\Java\your_jdk_version\jre\bin\server.
+_____________________
+1 = > C:\Program Files(86)\Java\your_jdk_version\jre\bin\server.
 
-C:\Program Files(86)\swipl\bin.
+2 = > C:\Program Files(86)\swipl\bin.
 
-C:\Program Files(86)\swipl\lib\jpl.jar
+3 = > C:\Program Files(86)\swipl\lib\jpl.jar
 
 refresh your project.
  --basic login credentials
