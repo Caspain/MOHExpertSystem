@@ -119,8 +119,10 @@ public class Model {
 
 
 	public void AlertAuthoritiesOfSpike() {
+		LoadDataBase();
+		getMinimumAge();
 		Variable X = new Variable("Trigger");
-		Term q2 = new Compound("generate_alert", new Term[] { new Variable("Trigger") });
+		Term q2 = new Compound("generate_alert", new Term[] { X});
 		Query q3 = new Query(q2);
 		q3.open();
 		if (q3.hasMoreElements()) {
@@ -165,28 +167,148 @@ public class Model {
 	 */
 	private void getMinimumAge(){
 		
+		Variable age = new Variable("MinAge");
+		Query ageTerm = new Query("stat_min_age",new Term[]{age});
+		
+		
+		System.out.println("getting age min");
+		if(ageTerm.hasMoreElements()){
+		
+			Object c = ageTerm.nextElement();
+			if(c!=null){
+				{
+					 //append a curly bracket to it
+					 
+					 System.out.println(c);
+					 Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : Min Age ");
+						alert.setContentText(c.toString());
+						
+						Optional<ButtonType> result = alert.showAndWait();
+				 }
+			}
+		}
+		
 	}
 
 	/*
 	 * get oldest person in db
 	 */
 	private void getMaximumAge(){
+		Variable age = new Variable("MaxAge");
+		Query ageTerm = new Query("stat_max_age",new Term[]{age});
 		
+		
+		System.out.println("getting age max");
+		if(ageTerm.hasMoreElements()){
+		
+			Object c = ageTerm.nextElement();
+			if(c!=null){
+				{
+					 //append a curly bracket to it
+					 
+					 System.out.println(c);
+					 Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : Min Age ");
+						alert.setContentText(c.toString());
+						
+						Optional<ButtonType> result = alert.showAndWait();
+				 }
+			}
+		}
 	}
 
 	/*
 	 * finds records of patients with a family history of diabetes
 	 */
 	private void stat_family_history(){
+		Variable age = new Variable("HistoryCount");
+		Query ageTerm = new Query("stat_family_history",new Term[]{age});
 		
+		
+		System.out.println("getting family history count");
+		if(ageTerm.hasMoreElements()){
+		
+			Object c = ageTerm.nextElement();
+			if(c!=null){
+				{
+					 //append a curly bracket to it
+					 
+					 System.out.println(c);
+					 Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : Family history count ");
+						alert.setContentText(c.toString());
+						
+						Optional<ButtonType> result = alert.showAndWait();
+				 }
+			}
+		}
 	}
 	
 	/*
 	 * Calculates average age of all patient records
 	 */
 	private void stat_avg_age(){
+		Variable age = new Variable("AverageAge");
+		Query ageTerm = new Query("stat_avg_age",new Term[]{age});
 		
+		
+		System.out.println("getting average age");
+		if(ageTerm.hasMoreElements()){
+		
+			Object c = ageTerm.nextElement();
+			if(c!=null){
+				{
+					 //append a curly bracket to it
+					 
+					 System.out.println(c);
+					 Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : Average Age ");
+						alert.setContentText(c.toString());
+						
+						Optional<ButtonType> result = alert.showAndWait();
+				 }
+			}
+		}
 	}
 	
+
+	
+    /*
+     * Counts the number of High risk or Very High risk records
+     */
+    private void stat_num_records(){
+    	Variable age = new Variable("Count");
+		Query ageTerm = new Query("stat_num_high_risk",new Term[]{age});
+		
+		
+		System.out.println("getting count of high risk");
+		if(ageTerm.hasMoreElements()){
+		
+			Object c = ageTerm.nextElement();
+			if(c!=null){
+				{
+					 //append a curly bracket to it
+					 
+					 System.out.println(c);
+					 Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : Number of High risk or Very High risk records");
+						alert.setContentText(c.toString());
+						
+						Optional<ButtonType> result = alert.showAndWait();
+				 }
+			}
+		}
+    }
 	
 }
