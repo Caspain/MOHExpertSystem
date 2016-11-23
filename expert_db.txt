@@ -30,3 +30,4 @@ user(user_bmi_type(NormalWeight,user_name(gfdgkq)),user_age(42),user_weight(65.7
 user(user_bmi_type(Obese,user_name(fdkf)),user_age(23),user_weight(197.31252),user_ethnicity(djgkf),user_height(1.651))
 user(user_bmi_type(OverWeight,user_name(jfkgj)),user_age(34),user_weight(80.739376),user_ethnicity(jkdfgjf),user_height(1.753))
 user(user_bmi_type(NormalWeight,user_name(ds)),user_age(12),user_weight(74.84268),user_ethnicity(dfg),user_height(1.905))
+user(user_bmi_type(Obese,user_name(hdfj)),user_age(43),user_weight(150.592544),user_ethnicity(fdjks),user_height(1.676))

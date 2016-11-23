@@ -106,34 +106,17 @@ public class Model {
 
 		Query testQuery = new Query(query);
        
-		if(testQuery.hasNext()){
-		testQuery.nextElement().toString();
-		
+		if(testQuery.hasMoreElements()){
+		Object c =testQuery.nextElement();
+	
 		}
-		Variable X = new Variable("Trigger");
-		Term q2 = new Compound("generate_alert", new Term[] { new Variable("Trigger") });
-		Query q3 = new Query(q2);
-		q3.open();
-		if (q3.hasMoreElements()) {
-			Object c = q3.nextElement();
-			if (c != null)
-				System.out.println((c));
-		}
+	
 		return  "";
 		
 	
 
 	}
 
-	public static String ParseResult(String result) {
-		int index = result.indexOf(":");
-		// String recomendation = result.substring((index+1),
-		// result.length()-1);
-		// recomendation = recomendation.trim();
-		System.out.println(result);
-		return result;// DisplayRecomendations(result);
-
-	}
 
 	public void AlertAuthoritiesOfSpike() {
 		Variable X = new Variable("Trigger");
@@ -177,5 +160,33 @@ public class Model {
 		quer.hasMoreElements();
 	}
 
+	/*
+	 * get youngest person in db
+	 */
+	private void getMinimumAge(){
+		
+	}
+
+	/*
+	 * get oldest person in db
+	 */
+	private void getMaximumAge(){
+		
+	}
+
+	/*
+	 * finds records of patients with a family history of diabetes
+	 */
+	private void stat_family_history(){
+		
+	}
+	
+	/*
+	 * Calculates average age of all patient records
+	 */
+	private void stat_avg_age(){
+		
+	}
+	
 	
 }
