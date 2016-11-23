@@ -328,7 +328,6 @@ update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighB
 
 	TotalPoints is (APoints + BPoints + WPoints + EPoints + VPoints + BPPoints + BGPoints + HPoints),
 	calculate_diabetes_risk(TotalPoints, Risk),
-	show_recommendations(Risk),
 
 	% add data to database and persist
 	assert(record(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category, BMI, TotalPoints, Risk)),

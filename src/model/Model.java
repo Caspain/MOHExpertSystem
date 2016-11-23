@@ -101,14 +101,15 @@ public class Model {
 				waistCircumI, ExerAmt, VegFruits, HighBP, HighBG, genderS, categoryI });
 
 		Query testQuery = new Query(query);
-
-		testQuery.open();
-		if (testQuery.hasMoreElements()) {
-			return ParseResult(testQuery.nextElement().toString()); // parse
-																	// recomendations
+       String ans = "";
+		if(testQuery.hasNext()){
+			ans = testQuery.nextElement().toString();
+		
 		}
-		testQuery.close();
-		return null;
+		
+		return  ans;
+		
+	
 
 	}
 

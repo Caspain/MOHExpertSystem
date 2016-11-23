@@ -95,7 +95,7 @@ public class Main extends Application {
 		TextField userNameField = new TextField();
 		root.add(userNameField, 1, 1);
 
-		Label password = new Label("password");
+		Label password = new Label("Password");
 		root.add(password, 0, 2);
 		PasswordField Password = new PasswordField();
 		root.add(Password, 1, 2);
@@ -373,7 +373,7 @@ public class Main extends Application {
 																								// scene
 					
 					//call spike alert instead
-					ShowSpikeAlert(result);
+					ShowRecomendations(result);
 				});
 				Submit.setId("submit-query");
 				Back.setId("submit-query");
@@ -705,7 +705,7 @@ public class Main extends Application {
 				break;
 
 			case RECOMENDATION_SCENE:
-				Scenes.RecomendationScene = new Scene(root, 290, 200);
+				Scenes.RecomendationScene = new Scene(root, 300, 220);
 				PrimaryStage.setTitle("Recomendations");
 				PrimaryStage.setScene(Scenes.RecomendationScene);
 				Scenes.RecomendationScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
@@ -782,7 +782,8 @@ public class Main extends Application {
 
 		}
 
-		public static void ShowSpikeAlert(String query){
+		public static void ShowRecomendations(String query){
+			/*
 			Alert alert = new Alert(AlertType.INFORMATION);
 
 			alert.setTitle("Query Response");
@@ -797,8 +798,8 @@ public class Main extends Application {
 			} else {
 			    // ... user chose CANCEL or closed the dialog
 			}
-			
-			
+			*/
+			DisplayRecomendations("");// displays
 		}
 		public static boolean Recomendation_Back = false;
 		public static final String QUERY_SCENE = "QUERY-SCENE";

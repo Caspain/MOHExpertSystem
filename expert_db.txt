@@ -19,3 +19,7 @@ user(user_bmi_type(NormalWeight,user_name(john)),user_age(20),user_weight(72.121
 user(user_bmi_type(OverWeight,user_name(nemis)),user_age(30),user_weight(74.84268),user_ethnicity(jam),user_height(1.651))
 user(user_bmi_type(UnderWeight,user_name(samueal)),user_age(44),user_weight(64.410064),user_ethnicity(mexican),user_height(1.930))
 user(user_bmi_type(NormalWeight,user_name(drack)),user_age(23),user_weight(65.77083999999999),user_ethnicity(jan),user_height(1.676))
+user(user_bmi_type(OverWeight,user_name(nickoy)),user_age(22),user_weight(67.585208),user_ethnicity(jamaican),user_height(1.575))
+user(user_bmi_type(UnderWeight,user_name(fdf)),user_age(34),user_weight(65.77083999999999),user_ethnicity(cuasn),user_height(1.930))
+user(user_bmi_type(NormalWeight,user_name(Nick)),user_age(35),user_weight(70.30676),user_ethnicity(cuban),user_height(1.727))
+user(user_bmi_type(NormalWeight,user_name(dasdm)),user_age(23),user_weight(68.0388),user_ethnicity(ndsf),user_height(1.702))
