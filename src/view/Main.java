@@ -783,22 +783,7 @@ public class Main extends Application {
 		}
 
 		public static void ShowRecomendations(String query){
-			/*
-			Alert alert = new Alert(AlertType.INFORMATION);
-
-			alert.setTitle("Query Response");
-			alert.setHeaderText("Information Returned");
-			alert.setContentText(query);
-			
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
-			
-			    // ... user chose OK
-				DisplayRecomendations("");// displays
-			} else {
-			    // ... user chose CANCEL or closed the dialog
-			}
-			*/
+		
 			DisplayRecomendations("");// displays
 		}
 		public static boolean Recomendation_Back = false;

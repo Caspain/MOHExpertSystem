@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jpl7.Atom;
 import org.jpl7.Compound;
@@ -14,7 +15,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
@@ -101,13 +105,21 @@ public class Model {
 				waistCircumI, ExerAmt, VegFruits, HighBP, HighBG, genderS, categoryI });
 
 		Query testQuery = new Query(query);
-       String ans = "";
+       
 		if(testQuery.hasNext()){
-			ans = testQuery.nextElement().toString();
+		testQuery.nextElement().toString();
 		
 		}
-		
-		return  ans;
+		Variable X = new Variable("Trigger");
+		Term q2 = new Compound("generate_alert", new Term[] { new Variable("Trigger") });
+		Query q3 = new Query(q2);
+		q3.open();
+		if (q3.hasMoreElements()) {
+			Object c = q3.nextElement();
+			if (c != null)
+				System.out.println((c));
+		}
+		return  "";
 		
 	
 
@@ -130,9 +142,40 @@ public class Model {
 		q3.open();
 		if (q3.hasMoreElements()) {
 			Object c = q3.nextElement();
-			if (c != null)
-				System.out.println((c));
+			if (c != null){
+				 String[] args= c.toString().split("=");
+				 if(args[1].charAt(args[1].length()-2) =='0'){
+						
+						Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : 0 ");
+						alert.setContentText("no increase in diabetes level");
+						
+						Optional<ButtonType> result = alert.showAndWait();
+						
+						
+				   	 System.out.println("no increase in diabetes level. " + args[1].charAt(args[1].length()-2));
+				 }
+			  else{
+			    	 System.out.println("ALERT: Over 75% of database records are [HIGH/VERY HIGH] risk for Type 2 Diabetes." + args[1].charAt(args[1].length()-2));
+			    		Alert alert = new Alert(AlertType.INFORMATION);
+
+						alert.setTitle("Query Response");
+						alert.setHeaderText("returned : 1 ");
+						alert.setContentText("ALERT: Over 75% of database records are [HIGH/VERY HIGH] risk for Type 2 Diabetes.");
+						
+						Optional<ButtonType> result = alert.showAndWait();
+			     }
+			}
 		}
 	}
+	
+	private void LoadDataBase(){
+		Query quer = new Query("load_database");
+		quer.open();
+		quer.hasMoreElements();
+	}
 
+	
 }
