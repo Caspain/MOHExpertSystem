@@ -778,6 +778,8 @@ public class Main extends Application {
 			});
 			SwitchScene(RECOMENDATION_SCENE, root);
 
+			 //re consult database here
+			 model.consultDb();
 			return root;
 
 		}
