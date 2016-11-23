@@ -117,10 +117,13 @@ public class Model {
 
 	}
 
+	/*
+	 * everytime a entry is inserted,consult databse
+	 * everytime a utility method will be called, call load_database first
+	 */
 
 	public void AlertAuthoritiesOfSpike() {
-		LoadDataBase();
-		getMinimumAge();
+		
 		Variable X = new Variable("Trigger");
 		Term q2 = new Compound("generate_alert", new Term[] { X});
 		Query q3 = new Query(q2);
