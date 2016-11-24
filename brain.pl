@@ -61,11 +61,11 @@ calculate_height(Feet,Inches,Height):-
  
  % bmi classification based on height(meters) and weight(pounds).
 classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl ,(
-Bmi >= 30.0 -> Status = 'Obese'; 
+Bmi >= 30.0 -> Status = 'obese'; 
 Bmi < 18.5 -> 
-Status = 'UnderWeight'; Bmi >= 18.5 ,
- Bmi =< 24.9 -> Status = 'NormalWeight';
- Bmi >= 25 , Bmi < 30 -> Status = 'OverWeight'
+Status = 'underWeight'; Bmi >= 18.5 ,
+ Bmi =< 24.9 -> Status = 'normalWeight';
+ Bmi >= 25 , Bmi < 30 -> Status = 'overWeight'
 ),nl, file_write(Name,Age,Origin,Status,Height,Weight).
 
 
