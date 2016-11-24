@@ -136,7 +136,6 @@ public class Model {
 
 	public void AlertAuthoritiesOfSpike() {
 	
-		
 		Variable X = new Variable("Trigger");
 		Term q2 = new Compound("generate_alert", new Term[] { X});
 		Query q3 = new Query(q2);

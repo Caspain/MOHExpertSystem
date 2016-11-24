@@ -36,8 +36,14 @@ read_file(Stream,[X|L]) :-
 take :-
 retractall(data).
 
-loop_data(Name) :-
-  data(user(user_bmi_type(_,user_name(Name)),user_age(_),user_weight(_),user_ethnicity(_),user_height(_))),concatlist([Name],[],L),write(L),fail.
+stat_user_weight(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Weight),fail.
+  
+  stat_user_height(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Height),fail.
+  
+  stat_user_bmi(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Type),fail.
   
  
   

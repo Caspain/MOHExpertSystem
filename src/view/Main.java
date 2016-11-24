@@ -201,8 +201,29 @@ public class Main extends Application {
 				SubmitQuery.setOnAction((event) -> {
 
 					String query = getQueryText();
-
-					ShowQueryResponse(query);
+                     String response = "null";
+					switch(query){
+					 
+					case "stat_min_age":{
+						
+						break;
+					}
+					case "stat_max_age":{
+						
+						break;
+					}
+					case "stat_family_history":{
+						break;
+					}
+					case "stat_avg_age":{
+						
+						break;
+					}
+					default:
+						System.out.println("invalid query parameter: " + query);
+						break;
+					}
+					ShowQueryResponse(response);
 				});
 				/*
 				 * go back to indexer scene

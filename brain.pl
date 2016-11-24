@@ -120,9 +120,24 @@ update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, Hi
 classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
 
 
-loop_data :-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),concatlist([Name],[],L),write(L),fail.
+  stat_user_all(Name) :-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),
+  nl,write(Type), nl, write(Age),nl ,write(Weight),nl, write(Origin), nl , write(Height),fail.
 
+  stat_user_weight(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Weight),fail.
+  
+  stat_user_height(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Height),fail.
+  
+  stat_user_bmi(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Type),fail.
+  
+  stat_user_age(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Age),fail.
+  
+  stat_user_ethnicity(Name):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Origin),fail.
 
 % defines the format for user input variables
 % facts
