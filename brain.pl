@@ -428,6 +428,80 @@ stat_family_history(HistoryCount):-
 	filter_fam_history(HistoryList, FilteredList),
 	length(FilteredList, HistoryCount), !.
 
+	
+	
+	%%%%% finds list of records in age above limit %%%%%
+stat_age_filter_above(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeMore(AllRecords, Records, Age), !.
+
+
+%%%%% returns list of records with age below limit
+stat_age_filter_below(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeLess(AllRecords, Records, Age), !.
+
+%%%%% returns records with bmi greater than Set BMI %%%%%
+stat_bmi_filter_above(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMIMore(AllRecords, Records, BMI), !.
+
+%%%%% returns records with bmi less than Set BMI %%%%%
+stat_bmi_filter_below(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMILess(AllRecords, Records, BMI), !.
+
+%%%%% returns records based on risk level %%%%%%
+stat_risk_filter(Risk, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flRisk(AllRecords, Records, Risk), !.
+
+
+%%%%% returns records based on gender %%%%%
+stat_gender_filter(Gender, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flGender(AllRecords, Records, Gender), !.
+
+%%%%% returns records of patients with family history of diabetes %%%%
+stat_family_history_filter(Category, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flFamilyHistory(AllRecords, Records, Category), !.
+
+
+%%%%% returns records of patients above a certain weight %%%%%
+stat_weight_filter_above(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightMore(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients below a certain weight %%%%%
+stat_weight_filter_below(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightLess(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients above a certain height %%%%%
+stat_height_filter_above(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightMore(AllRecords, Records, Height), !.
+
+
+%%%%% returns records of patients below a certain height %%%%%
+stat_height_filter_below(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightLess(AllRecords, Records, Height), !.
+
+	
+	
 %% determine if a family members have been diagnosed
 %% with type 1 or type2 diabetes
 family_history(Category):-
