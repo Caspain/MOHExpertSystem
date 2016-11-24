@@ -350,12 +350,65 @@ public class Model {
 			System.out.println("success. retracting data");
 		}
     }
+    /*
+     * all data for person with name X
+     */
 	
-    private void loopStoredData(){
-	Query data = new Query("retract_data");
+    private void  stat_user_all(String name){
+	Query data = new Query("stat_user_all",new Term[]{new Atom(name)});
 		
 		if(data.hasSolution()){
-			System.out.println("success. retracting data");
+			System.out.println("success. name all");
 		}
     }
+    /*
+     * stat_user_weight
+     */
+    private void  stat_user_weight(String name){
+    	Query data = new Query("stat_user_weight",new Term[]{new Atom(name)});
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success. name stat_user_weight");
+    		}
+        }
+    /*
+     * stat_user_weight
+     */
+    private void   stat_user_height(String name){
+    	Query data = new Query("stat_user_height",new Term[]{new Atom(name)});
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success. name  stat_user_height");
+    		}
+        }
+    /*
+     * stat_user_bmi
+     */
+    private void   stat_user_bmi(String name){
+    	Query data = new Query("stat_user_bmi",new Term[]{new Atom(name)});
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success. name  stat_user_bmi");
+    		}
+        }
+    /*
+     * stat_user_bmi
+     */
+    private void   stat_user_age(String name){
+    	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success. name stat_user_age");
+    		}
+        }
+    /*
+     * stat_user_ethnicity
+     */
+    private void  stat_user_ethnicity(String name){
+    	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success. name stat_user_ethnicity");
+    		}
+        }
 }
