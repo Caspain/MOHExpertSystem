@@ -279,6 +279,42 @@ public class Main extends Application {
 						
 						break;
 					}
+					case "stat_height_filter_below":{
+						model.stat_height_filter_below(Integer.parseInt(results[1]));
+						break;
+					}
+					case "stat_height_filter_above":{
+						model.stat_height_filter_above(Integer.parseInt(results[1]));
+						break;
+					}
+					case "stat_weight_filter_below":{
+						model.stat_weight_filter_below(Integer.parseInt(results[1]));
+						break;
+					}
+					case "stat_weight_filter_above":{
+						model.stat_weight_filter_above(Integer.parseInt(results[1]));
+						break;
+					}
+					case "stat_family_history_filter":{
+						model.stat_family_history_filter(Integer.parseInt(results[1]));
+						break;
+					}
+					case "stat_gender_filter":{
+						model.stat_gender_filter((results[1]));
+						break;
+					}
+					case "stat_risk_filter":{
+						model.stat_risk_filter((results[1]));
+						break;
+					}
+					case "stat_age_filter_below":{
+						model.stat_age_filter_below((Integer.parseInt(results[1])));
+						break;
+					}
+					case "stat_age_filter_above":{
+						model.stat_age_filter_above((Integer.parseInt(results[1])));
+						break;
+					}
 					
 					default:
 						System.out.println("invalid query parameter: " + query);
