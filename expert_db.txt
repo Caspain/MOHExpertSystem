@@ -1,5 +1,6 @@
-user(user_bmi_type(underWeight,user_name(admin)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
-user(user_bmi_type(underWeight,user_name(nick)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
-user(user_bmi_type(underWeight,user_name(kirk)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
-
-
+user(user_bmi_type(overWeight,user_name(sam)),user_age(21),user_weight(70.30676),user_ethnicity(cuban),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(dean)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(ricky)),user_age(27),user_weight(70.30676),user_ethnicity(jaaas),user_height(1.905)).
+user(user_bmi_type(normalWeight,user_name(king)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(admin)),user_age(30),user_weight(70.30676),user_ethnicity(cuabn),user_height(1.930)).
+user(user_bmi_type(normalWeight,user_name(king2)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).

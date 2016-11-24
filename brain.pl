@@ -1,4 +1,3 @@
-
 dynamic data. % contains dynamic user data
 %----------------------------------------------------------
 /*
@@ -178,19 +177,7 @@ risk(sym(moderate), name("Moderate")).
 risk(sym(high), name("High")).
 risk(sym(very_high), name("Very High")).
 
-%% the recommendations based on risk level
-risk_treatment(low, ['Continue to Eat Lots of Vegetables/Fruits', 'Continue to exercise regularly (running, walking, swimming, etc.).', 'Continue to limit the amount of glucose that is consumed on a daily basis.']).
-
-risk_treatment(slightly_elevated, ['Increase the amount of vegetables/fruits in your diet', 'Attempt to execise more frequently (playing a sport, dancing or using the threadmill).', 'Avoid items that increase sodium/glucose levels in the body as medications for these illnesses will increase your risk of Type 2 diabetes.']).
-
-risk_treatment(moderate, ['Eating a wide variety of foods helps you stay healthy. Try to include foods from all the food groups at each meal.', 'Limit your intake of fatty foods, especially those high in saturated fat, such as hamburgers, deep-fried foods, bacon, and butter.', 'Protein foods include meat, poultry, seafood, eggs, beans and peas, nuts, seeds, and processed soy foods. Eat fish and poultry more often. Remove the skin from chicken and turkey. Select lean cuts of beef, veal, pork, or wild game. Trim all visible fat from meat. Bake, roast, broil, grill, or boil instead of frying. When frying proteins, use healthy oils such as olive oil.']).
-
-risk_treatment(high, ['Attempt to do some type of strength training at least 2 times per week in addition to aerobic activity.', 'Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising.', 'Maintaining an optimum BMI, i.e. at the lower end of the normal range. For the adult population, thismeansmaintaining amean BMI in the range 21--23 kg/m2 and avoiding weight gain (>5 kg) in adult life.']).
-
-risk_treatment(very_high, ['Practice an endurance activity at moderate or greater level of intensity (e.g. brisk walking) for one hour or more per day on most days per week.', 'Achieving adequate intakes of nonstarch polysacaride (NSP) through regular consumption of wholegrain cereals, legumes, fruits and vegetables. A minimum daily intake of 20g is recommended.', 'Share your desserts to ensure that you do not consume too much sugars.']).
-
-
-
+% ----------------------------------------------------------------
 get_age(record(_,Age,_,_,_,_,_,_,_,_,_,_,_), Age).
  get_bmi(record(_,_,_,_,_,_,_,_,_,_,BMI,_,_), BMI).
  get_risk(record(_,_,_,_,_,_,_,_,_,_,_,_, Risk), Risk).
@@ -283,8 +270,83 @@ get_age(record(_,Age,_,_,_,_,_,_,_,_,_,_,_), Age).
  	flGender(T, NT, Needle).
  flFamilyHistory([_|T], Result, Needle):- flFamilyHistory(T, Result, Needle).
 
+% ----------------------------------------------------------
+%%%%% finds list of records in age above limit %%%%%
+stat_age_filter_above(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeMore(AllRecords, Records, Age), !.
 
 
+%%%%% returns list of records with age below limit
+stat_age_filter_below(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeLess(AllRecords, Records, Age), !.
+
+%%%%% returns records with bmi greater than Set BMI %%%%%
+stat_bmi_filter_above(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMIMore(AllRecords, Records, BMI), !.
+
+%%%%% returns records with bmi less than Set BMI %%%%%
+stat_bmi_filter_below(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMILess(AllRecords, Records, BMI), !.
+
+%%%%% returns records based on risk level %%%%%%
+stat_risk_filter(Risk, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flRisk(AllRecords, Records, Risk), !.
+
+
+%%%%% returns records based on gender %%%%%
+stat_gender_filter(Gender, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flGender(AllRecords, Records, Gender), !.
+
+%%%%% returns records of patients with family history of diabetes %%%%
+stat_family_history_filter(Category, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flFamilyHistory(AllRecords, Records, Category), !.
+
+
+%%%%% returns records of patients above a certain weight %%%%%
+stat_weight_filter_above(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightMore(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients below a certain weight %%%%%
+stat_weight_filter_below(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightLess(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients above a certain height %%%%%
+stat_height_filter_above(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightMore(AllRecords, Records, Height), !.
+
+
+%%%%% returns records of patients below a certain height %%%%%
+stat_height_filter_below(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightLess(AllRecords, Records, Height), !.
+%-----------------------------------------------------------
+%% the recommendations based on risk level
+risk_treatment(low, ['Continue to Eat Lots of Vegetables/Fruits', 'Continue to exercise regularly (running, walking, swimming, etc.).', 'Continue to limit the amount of glucose that is consumed on a daily basis.']).
+risk_treatment(slightly_elevated, ['Increase the amount of vegetables/fruits in your diet', 'Attempt to execise more frequently (playing a sport, dancing or using the threadmill).', 'Avoid items that increase sodium/glucose levels in the body as medications for these illnesses will increase your risk of Type 2 diabetes.']).
+risk_treatment(moderate, ['Eating a wide variety of foods helps you stay healthy. Try to include foods from all the food groups at each meal.', 'Limit your intake of fatty foods, especially those high in saturated fat, such as hamburgers, deep-fried foods, bacon, and butter.', 'Protein foods include meat, poultry, seafood, eggs, beans and peas, nuts, seeds, and processed soy foods. Eat fish and poultry more often. Remove the skin from chicken and turkey. Select lean cuts of beef, veal, pork, or wild game. Trim all visible fat from meat. Bake, roast, broil, grill, or boil instead of frying. When frying proteins, use healthy oils such as olive oil.']).
+risk_treatment(high, ['Attempt to do some type of strength training at least 2 times per week in addition to aerobic activity.', 'Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising.', 'Maintaining an optimum BMI, i.e. at the lower end of the normal range. For the adult population, thismeansmaintaining amean BMI in the range 21--23 kg/m2 and avoiding weight gain (>5 kg) in adult life.']).
+risk_treatment(very_high, ['Practice an endurance activity at moderate or greater level of intensity (e.g. brisk walking) for one hour or more per day on most days per week.', 'Achieving adequate intakes of nonstarch polysacaride (NSP) through regular consumption of wholegrain cereals, legumes, fruits and vegetables. A minimum daily intake of 20g is recommended.', 'Share your desserts to ensure that you do not consume too much sugars.']).
 
 
 %% filters high or very high risk records
@@ -428,80 +490,6 @@ stat_family_history(HistoryCount):-
 	filter_fam_history(HistoryList, FilteredList),
 	length(FilteredList, HistoryCount), !.
 
-	
-	
-	%%%%% finds list of records in age above limit %%%%%
-stat_age_filter_above(Age, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flAgeMore(AllRecords, Records, Age), !.
-
-
-%%%%% returns list of records with age below limit
-stat_age_filter_below(Age, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flAgeLess(AllRecords, Records, Age), !.
-
-%%%%% returns records with bmi greater than Set BMI %%%%%
-stat_bmi_filter_above(BMI, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flBMIMore(AllRecords, Records, BMI), !.
-
-%%%%% returns records with bmi less than Set BMI %%%%%
-stat_bmi_filter_below(BMI, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flBMILess(AllRecords, Records, BMI), !.
-
-%%%%% returns records based on risk level %%%%%%
-stat_risk_filter(Risk, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flRisk(AllRecords, Records, Risk), !.
-
-
-%%%%% returns records based on gender %%%%%
-stat_gender_filter(Gender, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flGender(AllRecords, Records, Gender), !.
-
-%%%%% returns records of patients with family history of diabetes %%%%
-stat_family_history_filter(Category, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flFamilyHistory(AllRecords, Records, Category), !.
-
-
-%%%%% returns records of patients above a certain weight %%%%%
-stat_weight_filter_above(Weight, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flWeightMore(AllRecords, Records, Weight), !.
-
-%%%%% returns records of patients below a certain weight %%%%%
-stat_weight_filter_below(Weight, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flWeightLess(AllRecords, Records, Weight), !.
-
-%%%%% returns records of patients above a certain height %%%%%
-stat_height_filter_above(Height, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flHeightMore(AllRecords, Records, Height), !.
-
-
-%%%%% returns records of patients below a certain height %%%%%
-stat_height_filter_below(Height, Records):-
-	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
-		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
-	flHeightLess(AllRecords, Records, Height), !.
-
-	
-	
 %% determine if a family members have been diagnosed
 %% with type 1 or type2 diabetes
 family_history(Category):-
@@ -536,7 +524,7 @@ show_recommendations(Risk):-
 generate_alert(Trigger):-
 	stat_num_records(CountAll),
 	stat_num_high_risk(CountHighRisk),
-	(CountAll == 0 -> Percentage is CountAll; Percentage is (CountHighRisk / CountAll) * 100),
+	(CountAll == 0 -> Percentage is 0; Percentage is (CountHighRisk / CountAll) * 100),
 	Percentage >= 75 -> Trigger is 1; Trigger is 0.
 
 %%%%% deletes all the items from the database
@@ -549,7 +537,7 @@ load_database:-
 %%%%% calculates values for new patient record %%%%%
 % modified 
 update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category,BMI):-
-	calculate_bmi(Weight, Height, BMI),
+	% calculate_bmi(Weight, Height, BMI),
 	age_points(Age, APoints),
 	bmi_points(BMI, BPoints),
 	waist_circumference_points(WaistCir, Gender, WPoints),
@@ -588,12 +576,10 @@ run_program:-
 	  
     write("Welcome to the MOH Expert System."), nl,
     write("Correctly answer the following questions to get your Type 2 diabetes diagnosis."), nl, nl,
-
     %% alert the user if number of records at high risk or above is over 75%
     generate_alert(ShowAlert),
     (ShowAlert == 1 -> (write("ALERT: Over 75% of database records are [HIGH/VERY HIGH] risk for Type 2 Diabetes."), nl, nl); nl),
     write("What is your gender: "), read(Gender), nl,
-
     write("What is your age: "), read(Age), nl,
     write("What is your weight(kg): "), read(Weight), nl,
     write("What is your height(m): "), read(Height), nl,
@@ -608,4 +594,3 @@ run_program:-
 engine(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
 % prompt user for input
     test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category),file_write_2.
-	
