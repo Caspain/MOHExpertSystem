@@ -1,115 +1,4 @@
-
-
-%----------------------------------------------------------
-/*
-The Ministry of Health (MOH) has embarked on 
-some programs/initiatives aimed at 
-identifying and controlling certain
- lifestyle diseases such as diabetes.
- The Director of the MOH highlighted
- the need to educate the public about
- these diseases and has made the move 
- to partner with the school of computing 
- at the University 
-of Technology Jamaica (UTECH) to 
-create an Expert system that 
-could assist the MOH in its efforts
-*/
-
-% knowledge base for moh
-
-% BMI WEIGHT CATEGORIES
-% bmi facts
-
-underweight([18.5]). % below 
-normalweight([18.5,24.9]). % over and less than 24.9
-overweight([25,29.9]) . % 25 - 29.9	Overweight
-obese([30.0]). % over 30
-
-
-% BMI Calculations
-% bmi rules
-% printHeight(Height):- write("Height in meters =  "), nl,(format('~3f',[Height])),classify_bmi(Height).
-
-convertToM(CalcMeters,Height):- CalcM is (CalcMeters / 100),Height is CalcM .
-
-convertToCm(CalcFeetInches,Height):- CalcCm is (CalcFeetInches * 2.540), convertToM(CalcCm,Height).
-
-calculate_height(Feet,Inches,Height):- 
- CalcFeet is (Feet * 12 ), CalcFeetInches is 
- (CalcFeet + Inches), convertToCm(CalcFeetInches,Height).
- 
- % calculates the body mass index of the individual, R is Height squared.
- calculate_bmi(Height,Weight,Bmi):-nl, R is (Height * Height) , Bmi is (Weight / R).
- 
- %calculate  pounds weight to kilogram.
- calculate_weight(Weight,Kilogram):- Kilogram is (Weight * 0.453592).
- 
- %write to file
- file_write(Name,Age,Origin,Type,Height,Weight):-
-      format(atom(H),'~3f',[Height]),
-		 open('expert_db.txt',append,Stream),
-		 write(Stream,
-		 user(user_bmi_type(Type,user_name(Name)),
-			user_age(Age),
-			user_weight(Weight),
-			user_ethnicity(Origin),
-			user_height(Height))),nl(Stream),
-			      
-		 close(Stream).
-		
- 
- % bmi classification based on height(meters) and weight(pounds).
-classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl ,(
-Bmi >= 30.0 -> Status = 'Obese'; 
-Bmi < 18.5 -> 
-Status = 'UnderWeight'; Bmi >= 18.5 ,
- Bmi =< 24.9 -> Status = 'NormalWeight';
- Bmi >= 25 , Bmi < 30 -> Status = 'OverWeight'
-),nl, file_write(Name,Age,Origin,Status,Height,Weight).
-
-
-bmi_input(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
-calculate_height(Feet,Inches,Height), % returned Height in meters.
-calculate_weight(Weight,Kilogram),  % returned weight in pounds.
-calculate_bmi(Height,Kilogram,Bmi), % returns individual calculated body mass index.
-% intercept shervain files here
-format(atom(H),'~3f',[Height]), % up to three decimal places...
-update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category,Bmi),
-classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
-
-
-
-
-
-% defines the format for user input variables
-% facts
-user_name(Name).
-user_age(Age).
-user_weight(Weight).
-user_ethnicity(Origin).
-user_height(Height).
-bmi_type([obese,underweight,overweight,normalweight]).
-
-user_bmi_type(Type,user_name(Name)).
-
-% facts about a user
-
-user(user_bmi_type(Type,user_name(Name)),
-user_age(Age),
-user_weight(Weight),
-user_ethnicity(Origin),
-user_height(Height)).
-
-
-% inputs and test 
-test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
-bmi_input(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category). % calculate respective bmi classifiers.
-
-
-%----------------------------------------------------------
-:-use_module(library(csv)).
-
+:- use_module(library(csv)).
 
 :- dynamic record/13.
 :- dynamic test/2.
@@ -122,11 +11,11 @@ risk(sym(high), name("High")).
 risk(sym(very_high), name("Very High")).
 
 %% the recommendations based on risk level
-risk_treatment(low, ['X', 'Y', 'Z']).
-risk_treatment(slightly_elevated, ['A', 'B', 'C']).
-risk_treatment(moderate, ['L', 'M', 'N']).
-risk_treatment(high, ['H', 'I', 'J']).
-risk_treatment(very_high, ['Q', 'R', 'S']).
+risk_treatment(low, ['Continue to Eat Lots of Vegetables/Fruits', 'Continue to exercise regularly (running, walking, swimming, etc.).', 'Continue to limit the amount of glucose that is consumed on a daily basis.']).
+risk_treatment(slightly_elevated, ['Increase the amount of vegetables/fruits in your diet', 'Attempt to execise more frequently (playing a sport, dancing or using the threadmill).', 'Avoid items that increase sodium/glucose levels in the body as medications for these illnesses will increase your risk of Type 2 diabetes.']).
+risk_treatment(moderate, ['Eating a wide variety of foods helps you stay healthy. Try to include foods from all the food groups at each meal.', 'Limit your intake of fatty foods, especially those high in saturated fat, such as hamburgers, deep-fried foods, bacon, and butter.', 'Protein foods include meat, poultry, seafood, eggs, beans and peas, nuts, seeds, and processed soy foods. Eat fish and poultry more often. Remove the skin from chicken and turkey. Select lean cuts of beef, veal, pork, or wild game. Trim all visible fat from meat. Bake, roast, broil, grill, or boil instead of frying. When frying proteins, use healthy oils such as olive oil.']).
+risk_treatment(high, ['Attempt to do some type of strength training at least 2 times per week in addition to aerobic activity.', 'Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising.', 'Maintaining an optimum BMI, i.e. at the lower end of the normal range. For the adult population, thismeansmaintaining amean BMI in the range 21--23 kg/m2 and avoiding weight gain (>5 kg) in adult life.']).
+risk_treatment(very_high, ['Practice an endurance activity at moderate or greater level of intensity (e.g. brisk walking) for one hour or more per day on most days per week.', 'Achieving adequate intakes of nonstarch polysacaride (NSP) through regular consumption of wholegrain cereals, legumes, fruits and vegetables. A minimum daily intake of 20g is recommended.', 'Share your desserts to ensure that you do not consume too much sugars.']).
 
 %% filters high or very high risk records
 filter_high_risk([],[]).
@@ -151,6 +40,100 @@ maxList([H|_],H).
 minList([E],E).
 minList([H|T],Y):- minList(T,Y), H > Y,!.
 minList([H|_],H).
+
+get_age(record(_,Age,_,_,_,_,_,_,_,_,_,_,_), Age).
+get_bmi(record(_,_,_,_,_,_,_,_,_,_,BMI,_,_), BMI).
+get_risk(record(_,_,_,_,_,_,_,_,_,_,_,_, Risk), Risk).
+get_gender(record(Gender,_,_,_,_,_,_,_,_,_,_,_,_), Gender).
+get_weight(record(_,_,Weight,_,_,_,_,_,_,_,_,_,_), Weight).
+get_height(record(_,_,_,Height,_,_,_,_,_,_,_,_,_), Height).
+get_family_his(record(_, _, _, _, _, _, _, _, _, Category, _, _, _), Category).
+
+% filters age
+flAgeLess([], [], _).
+flAgeLess([H|T], [H|NT], Pivot):-
+	get_age(H, Age),
+	Age < Pivot,
+	flAgeLess(T, NT, Pivot).
+flAgeLess([_|T], Result, Pivot):- flAgeLess(T, Result, Pivot).
+
+flAgeMore([], [], _).
+flAgeMore([H|T], [H|NT], Pivot):-
+	get_age(H, Age),
+	Age > Pivot,
+	flAgeMore(T, NT, Pivot).
+flAgeMore([_|T], Result, Pivot):- flAgeMore(T, Result, Pivot).
+
+% filters bmi
+flBMILess([], [], _).
+flBMILess([H|T], [H|NT], Pivot):-
+	get_bmi(H, BMI),
+	BMI < Pivot,
+	flBMILess(T, NT, Pivot).
+flBMILess([_|T], Result, Pivot):- flBMILess(T, Result, Pivot).
+
+flBMIMore([], [], _).
+flBMIMore([H|T], [H|NT], Pivot):-
+	get_bmi(H, BMI),
+	BMI > Pivot,
+	flBMIMore(T, NT, Pivot).
+flBMIMore([_|T], Result, Pivot):- flBMIMore(T, Result, Pivot).
+
+% filters gender
+flGender([], [], _).
+flGender([H|T], [H|NT], Needle):-
+	get_gender(H, Gender),
+	Gender == Needle,
+	flGender(T, NT, Needle).
+flGender([_|T], Result, Needle):- flGender(T, Result, Needle).
+
+% filters risk
+flRisk([], [], _).
+flRisk([H|T], [H|NT], Needle):-
+	get_risk(H, Risk),
+	Risk == Needle,
+	flRisk(T, NT, Needle).
+flRisk([_|T], Result, Needle):- flRisk(T, Result, Needle).
+
+
+% filters height
+flHeightLess([], [], _).
+flHeightLess([H|T], [H|NT], Pivot):-
+	get_height(H, Height),
+	Height < Pivot,
+	flHeightLess(T, NT, Pivot).
+flHeightLess([_|T], Result, Pivot):- flHeightLess(T, Result, Pivot).
+
+flHeightMore([], [], _).
+flHeightMore([H|T], [H|NT], Pivot):-
+	get_height(H, Height),
+	Height > Pivot,
+	flHeightMore(T, NT, Pivot).
+flHeightMore([_|T], Result, Pivot):- flHeightMore(T, Result, Pivot).
+
+% filters weight
+flWeightLess([], [], _).
+flWeightLess([H|T], [H|NT], Pivot):-
+	get_weight(H, Weight),
+	Weight < Pivot,
+	flWeightLess(T, NT, Pivot).
+flWeightLess([_|T], Result, Pivot):- flWeightLess(T, Result, Pivot).
+
+flWeightMore([], [], _).
+flWeightMore([H|T], [H|NT], Pivot):-
+	get_weight(H, Weight),
+	Weight > Pivot,
+	flWeightMore(T, NT, Pivot).
+flWeightMore([_|T], Result, Pivot):- flWeightMore(T, Result, Pivot).
+
+% filters family history
+flFamilyHistory([], [], _).
+flFamilyHistory([H|T], [H|NT], Needle):-
+	get_family_his(H, Category),
+	Category == Needle,
+	flGender(T, NT, Needle).
+flFamilyHistory([_|T], Result, Needle):- flFamilyHistory(T, Result, Needle).
+
 
 %% determine how many points to give based on age
 age_points(Age, Points):-
@@ -206,11 +189,11 @@ diabetes_history_points(Category, Points):-
     Category == 0 ->   Points is 0;
 	Category == 1 ->   Points is 3;
 		Points is 5.
-/*
+
 % calculates body mass index
 calculate_bmi(WeightKg, HeightM, BMI):-
     BMI is (WeightKg / (HeightM * HeightM)).
-*/
+
 %%%%% Counts the number of records that are within the database %%%%%
 stat_num_records(Count):-
 	findall(_, record(_,_,_,_,_,_,_,_,_,_,_,_,_), L),
@@ -269,6 +252,77 @@ stat_family_history(HistoryCount):-
 	filter_fam_history(HistoryList, FilteredList),
 	length(FilteredList, HistoryCount), !.
 
+%%%%% finds list of records in age above limit %%%%%
+stat_age_filter_above(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeMore(AllRecords, Records, Age), !.
+
+
+%%%%% returns list of records with age below limit
+stat_age_filter_below(Age, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flAgeLess(AllRecords, Records, Age), !.
+
+%%%%% returns records with bmi greater than Set BMI %%%%%
+stat_bmi_filter_above(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMIMore(AllRecords, Records, BMI), !.
+
+%%%%% returns records with bmi less than Set BMI %%%%%
+stat_bmi_filter_below(BMI, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flBMILess(AllRecords, Records, BMI), !.
+
+%%%%% returns records based on risk level %%%%%%
+stat_risk_filter(Risk, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flRisk(AllRecords, Records, Risk), !.
+
+
+%%%%% returns records based on gender %%%%%
+stat_gender_filter(Gender, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flGender(AllRecords, Records, Gender), !.
+
+%%%%% returns records of patients with family history of diabetes %%%%
+stat_family_history_filter(Category, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flFamilyHistory(AllRecords, Records, Category), !.
+
+
+%%%%% returns records of patients above a certain weight %%%%%
+stat_weight_filter_above(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightMore(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients below a certain weight %%%%%
+stat_weight_filter_below(Weight, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flWeightLess(AllRecords, Records, Weight), !.
+
+%%%%% returns records of patients above a certain height %%%%%
+stat_height_filter_above(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightMore(AllRecords, Records, Height), !.
+
+
+%%%%% returns records of patients below a certain height %%%%%
+stat_height_filter_below(Height, Records):-
+	findall(record(A,B,C,D,E,F,G,H,I,J,K,L,M),
+		record(A,B,C,D,E,F,G,H,I,J,K,L,M), AllRecords),
+	flHeightLess(AllRecords, Records, Height), !.
+
+
 %% determine if a family members have been diagnosed
 %% with type 1 or type2 diabetes
 family_history(Category):-
@@ -303,7 +357,8 @@ show_recommendations(Risk):-
 generate_alert(Trigger):-
 	stat_num_records(CountAll),
 	stat_num_high_risk(CountHighRisk),
-	(CountAll == 0 -> Percentage is 0; Percentage is (CountHighRisk / CountAll) * 100),
+	(CountAll == 0 -> Percentage is CountAll;
+	        Percentage is (CountHighRisk / CountAll) * 100),
 	Percentage >= 75 -> Trigger is 1; Trigger is 0.
 
 %%%%% deletes all the items from the database
@@ -314,9 +369,8 @@ load_database:-
 	maplist(assert, Rows).
 
 %%%%% calculates values for new patient record %%%%%
-% modified 
-update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category,BMI):-
-	% calculate_bmi(Weight, Height, BMI),
+update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category):-
+	calculate_bmi(Weight, Height, BMI),
 	age_points(Age, APoints),
 	bmi_points(BMI, BPoints),
 	waist_circumference_points(WaistCir, Gender, WPoints),
@@ -345,14 +399,7 @@ update_db_file:-
 
 
 %%%%% run the program in the console
-% first call test_user_data/6 predicate
-/*
 run_program:-
-      %test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG)/12
-	  % include gender later.
-	  % include category later
-      % include alert later
-	  
     write("Welcome to the MOH Expert System."), nl,
     write("Correctly answer the following questions to get your Type 2 diabetes diagnosis."), nl, nl,
 
@@ -371,8 +418,5 @@ run_program:-
     write("Have you ever been found to have high blood glucose(Yes/No): "), read(HighBG), nl,
     family_history(Category),
     update_database(Gender, Age, Weight, Height, WaistCir, ExerAmt, VegFruits, HighBP, HighBG, Category).
-*/
-engine(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
-% prompt user for input
-    test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category).
-	
+
+
