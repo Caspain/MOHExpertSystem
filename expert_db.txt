@@ -1,2 +1,5 @@
 user(user_bmi_type(underWeight,user_name(admin)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
-user(user_bmi_type(underWeight,user_name(JDSKF)),user_age(32),user_weight(15.422128),user_ethnicity(dsfs),user_height(1.016)).
+user(user_bmi_type(underWeight,user_name(nick)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
+user(user_bmi_type(underWeight,user_name(kirk)),user_age(31),user_weight(10.432616),user_ethnicity(21),user_height(1.041)).
+
+

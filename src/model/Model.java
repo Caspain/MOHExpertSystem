@@ -35,6 +35,18 @@ public class Model {
 		Query q1 = new Query("consult", new Term[] { new Atom(file) });
 
 		System.out.println("consult " + (q1.hasSolution() ? "succeeded" : "failed"));
+		
+		//load db
+		LoadDataBase();
+		
+		//retract all stored data
+		retractData();
+		
+		//get all stored data
+		assertStoredData();
+		
+		//show listing 
+		listing();
 	}
 
 	public Model() {
@@ -123,9 +135,7 @@ public class Model {
 	 */
 
 	public void AlertAuthoritiesOfSpike() {
-		LoadDataBase();
-		assetStoredData();
-		listing();
+	
 		
 		Variable X = new Variable("Trigger");
 		Term q2 = new Compound("generate_alert", new Term[] { X});
@@ -342,4 +352,11 @@ public class Model {
 		}
     }
 	
+    private void loopStoredData(){
+	Query data = new Query("retract_data");
+		
+		if(data.hasSolution()){
+			System.out.println("success. retracting data");
+		}
+    }
 }

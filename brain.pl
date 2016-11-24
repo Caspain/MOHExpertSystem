@@ -17,7 +17,9 @@ could assist the MOH in its efforts
 */
 
 
-
+    concatlist([],List2,List2).
+    concatlist([Item|Tail],List2,[Item|Newlist]) :-
+	concatlist(Tail,List2,Newlist).
 
 % responsible for reading all stored user data.
 retrieve_data :-
@@ -118,7 +120,8 @@ update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, Hi
 classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
 
 
-
+loop_data :-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),concatlist([Name],[],L),write(L),fail.
 
 
 % defines the format for user input variables
