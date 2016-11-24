@@ -411,4 +411,118 @@ public class Model {
     			System.out.println("success. name stat_user_ethnicity");
     		}
         }
+    //----------------------------------------------------------------------------------------filter rules
+    
+    /*
+     * returns records of patients below a certain height
+     */
+    public void  stat_height_filter_below(int age){
+    	Query data = new Query("stat_height_filter_below",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
+    		if(data.hasMoreElements()){
+    			System.out.println(data.nextElement().toString());
+    		}
+    		if(data.hasSolution()){
+    			System.out.println("success. stat_height_filter_below");
+    		}
+        }
+    
+    /*
+     * returns records of patients above a certain height
+     */
+    public void  stat_height_filter_above(int age){
+    	Query data = new Query("stat_height_filter_above",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_height_filter_above");
+		}
+        }
+    
+    /*
+     * returns records of patients below a certain weight
+     */
+    public void  stat_weight_filter_below(int weight){
+    	Query data = new Query("stat_weight_filter_below",new Term[]{(new org.jpl7.Integer((weight))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_weight_filter_below");
+		}
+        }
+    /*
+     *returns records of patients above a certain weight
+     */
+    public void  stat_weight_filter_above(int weight){
+    	Query data = new Query("stat_weight_filter_above",new Term[]{(new org.jpl7.Integer((weight))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_weight_filter_above");
+		}
+        }
+    /*
+     *returns records of patients with family history of diabetes
+     *values: 0,1,2
+     */
+    public void stat_family_history_filter(int code){
+    	Query data = new Query("stat_family_history_filter",new Term[]{(new org.jpl7.Integer((code))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_family_history_filter");
+		}
+        }
+    /*
+     *returns records based on gender
+     */
+    public void stat_gender_filter(String gender){
+    	Query data = new Query("stat_gender_filter",new Term[]{(new Atom((gender))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_gender_filter");
+		}
+        }
+    /*
+     *returns records based on risk level 
+     *values : 
+     */
+    public void stat_risk_filter(String risk){
+    	Query data = new Query("stat_risk_filter",new Term[]{(new Atom((risk))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_risk_filter");
+		}
+        }
+    /*
+     returns list of records with age below limit: 
+     */
+    public void stat_age_filter_below(int age){
+    	Query data = new Query("stat_age_filter_below",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_age_filter_below");
+		}
+        }
+    /*
+   finds list of records in age above limit
+    */
+   public void stat_age_filter_above(int age){
+		Query data = new Query("stat_age_filter_above",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
+		if(data.hasMoreElements()){
+			System.out.println(data.nextElement().toString());
+		}
+		if(data.hasSolution()){
+			System.out.println("success. stat_age_filter_above");
+		}
+       }
 }
