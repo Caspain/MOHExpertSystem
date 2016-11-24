@@ -171,7 +171,7 @@ public class Model {
 		}
 	}
 	
-	private void LoadDataBase(){
+	public void LoadDataBase(){
 		Query quer = new Query("load_database");
 		quer.open();
 		quer.hasMoreElements();
@@ -180,7 +180,7 @@ public class Model {
 	/*
 	 * get youngest person in db
 	 */
-	private void getMinimumAge(){
+	public void getMinimumAge(){
 		
 		Variable age = new Variable("MinAge");
 		Query ageTerm = new Query("stat_min_age",new Term[]{age});
@@ -211,7 +211,7 @@ public class Model {
 	/*
 	 * get oldest person in db
 	 */
-	private void getMaximumAge(){
+	public void getMaximumAge(){
 		Variable age = new Variable("MaxAge");
 		Query ageTerm = new Query("stat_max_age",new Term[]{age});
 		
@@ -240,7 +240,7 @@ public class Model {
 	/*
 	 * finds records of patients with a family history of diabetes
 	 */
-	private void stat_family_history(){
+	public void stat_family_history(){
 		Variable age = new Variable("HistoryCount");
 		Query ageTerm = new Query("stat_family_history",new Term[]{age});
 		
@@ -269,7 +269,7 @@ public class Model {
 	/*
 	 * Calculates average age of all patient records
 	 */
-	private void stat_avg_age(){
+	public void stat_avg_age(){
 		Variable age = new Variable("AverageAge");
 		Query ageTerm = new Query("stat_avg_age",new Term[]{age});
 		
@@ -300,7 +300,7 @@ public class Model {
     /*
      * Counts the number of High risk or Very High risk records
      */
-    private void stat_num_records(){
+    public void stat_num_records(){
     	Variable age = new Variable("Count");
 		Query ageTerm = new Query("stat_num_high_risk",new Term[]{age});
 		
@@ -326,7 +326,7 @@ public class Model {
 		}
     }
     
-    private static void assertStoredData(){
+    public static void assertStoredData(){
     
 		Query data = new Query("retrieve_data");
 		
@@ -334,7 +334,7 @@ public class Model {
 			System.out.println("success.retrieving data");
 		}
     }
-    private static void listing(){
+    public static void listing(){
         
     		Query data = new Query("listing");
     		
@@ -342,7 +342,7 @@ public class Model {
     			System.out.println("success.listing");
     		}
         }
-    private static void retractData(){
+    public static void retractData(){
     
     	Query data = new Query("retract_data");
 		
@@ -354,7 +354,7 @@ public class Model {
      * all data for person with name X
      */
 	
-    private void  stat_user_all(String name){
+    public void  stat_user_all(String name){
 	Query data = new Query("stat_user_all",new Term[]{new Atom(name)});
 		
 		if(data.hasSolution()){
@@ -364,7 +364,7 @@ public class Model {
     /*
      * stat_user_weight
      */
-    private void  stat_user_weight(String name){
+    public void  stat_user_weight(String name){
     	Query data = new Query("stat_user_weight",new Term[]{new Atom(name)});
     		
     		if(data.hasSolution()){
@@ -374,7 +374,7 @@ public class Model {
     /*
      * stat_user_weight
      */
-    private void   stat_user_height(String name){
+    public void   stat_user_height(String name){
     	Query data = new Query("stat_user_height",new Term[]{new Atom(name)});
     		
     		if(data.hasSolution()){
@@ -384,7 +384,7 @@ public class Model {
     /*
      * stat_user_bmi
      */
-    private void   stat_user_bmi(String name){
+    public void   stat_user_bmi(String name){
     	Query data = new Query("stat_user_bmi",new Term[]{new Atom(name)});
     		
     		if(data.hasSolution()){
@@ -394,7 +394,7 @@ public class Model {
     /*
      * stat_user_bmi
      */
-    private void   stat_user_age(String name){
+    public void   stat_user_age(String name){
     	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
     		
     		if(data.hasSolution()){
@@ -404,7 +404,7 @@ public class Model {
     /*
      * stat_user_ethnicity
      */
-    private void  stat_user_ethnicity(String name){
+    public void  stat_user_ethnicity(String name){
     	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
     		
     		if(data.hasSolution()){

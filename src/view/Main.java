@@ -201,24 +201,85 @@ public class Main extends Application {
 				SubmitQuery.setOnAction((event) -> {
 
 					String query = getQueryText();
+					  String[] results = query.split("->");
                      String response = "null";
-					switch(query){
+					switch(results[0]){
 					 
 					case "stat_min_age":{
-						
+					model.getMinimumAge();
 						break;
 					}
 					case "stat_max_age":{
-						
+						model.getMinimumAge();
 						break;
 					}
 					case "stat_family_history":{
+						model.stat_family_history();
 						break;
 					}
 					case "stat_avg_age":{
+						model.stat_avg_age();
+						break;
+					}
+					case "stat_num_high_risk":{
+						model.stat_num_records();
+						break;
+					}
+					case "stat_user_all":{
+						if(results.length > 1){
+							model.stat_user_all(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
 						
 						break;
 					}
+					case "stat_user_weight":{
+						if(results.length > 1){
+							model.stat_user_weight(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
+						
+						break;
+					}
+					case "stat_user_height":{
+						if(results.length > 1){
+							model.stat_user_height(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
+						
+						break;
+					}
+					case "stat_user_bmi":{
+						if(results.length > 1){
+							model.stat_user_bmi(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
+						
+						break;
+					}
+					case "stat_user_age":{
+						if(results.length > 1){
+							model.stat_user_age(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
+						
+						break;
+					}
+					case "stat_user_ethnicity":{
+						if(results.length > 1){
+							model.stat_user_ethnicity(results[1]);
+						}else{
+							System.out.println("name is required " + query);
+						}
+						
+						break;
+					}
+					
 					default:
 						System.out.println("invalid query parameter: " + query);
 						break;
