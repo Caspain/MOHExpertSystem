@@ -111,9 +111,9 @@ public class Model {
 	
 		}
 	
-		return  "";
 		
 	
+		return  "";
 
 	}
 
@@ -123,6 +123,9 @@ public class Model {
 	 */
 
 	public void AlertAuthoritiesOfSpike() {
+		LoadDataBase();
+		assetStoredData();
+		listing();
 		
 		Variable X = new Variable("Trigger");
 		Term q2 = new Compound("generate_alert", new Term[] { X});
@@ -311,6 +314,31 @@ public class Model {
 						Optional<ButtonType> result = alert.showAndWait();
 				 }
 			}
+		}
+    }
+    
+    private static void assertStoredData(){
+    
+		Query data = new Query("retrieve_data");
+		
+		if(data.hasSolution()){
+			System.out.println("success.retrieving data");
+		}
+    }
+    private static void listing(){
+        
+    		Query data = new Query("listing");
+    		
+    		if(data.hasSolution()){
+    			System.out.println("success.listing");
+    		}
+        }
+    private static void retractData(){
+    
+    	Query data = new Query("retract_data");
+		
+		if(data.hasSolution()){
+			System.out.println("success. retracting data");
 		}
     }
 	

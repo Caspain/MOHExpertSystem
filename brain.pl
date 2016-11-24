@@ -1,5 +1,5 @@
 
-
+dynamic data. % contains dynamic user data
 %----------------------------------------------------------
 /*
 The Ministry of Health (MOH) has embarked on 
@@ -16,10 +16,33 @@ create an Expert system that
 could assist the MOH in its efforts
 */
 
+
+
+
+% responsible for reading all stored user data.
+retrieve_data :-
+    write('retrieving stored data.'),
+    open('expert_db.txt', read, Str),
+    read_file(Str,Lines),
+    close(Str).
+	
+% check if end of file is reached.
+read_file(Stream,[]) :-
+    at_end_of_stream(Stream).
+	
+% keep reading lines if no end of file.
+read_file(Stream,[X|L]) :-
+    \+ at_end_of_stream(Stream),
+    read(Stream,X),
+	assert(data(X)),
+    read_file(Stream,L). 
+
+
 % knowledge base for moh
 
 % BMI WEIGHT CATEGORIES
 % bmi facts
+
 
 underweight([18.5]). % below 
 normalweight([18.5,24.9]). % over and less than 24.9
@@ -46,7 +69,11 @@ calculate_height(Feet,Inches,Height):-
  calculate_weight(Weight,Kilogram):- Kilogram is (Weight * 0.453592).
  
  %write to file
- file_write(Name,Age,Origin,Type,Height,Weight):-
+ file_write_2 :-
+  open('expert_db.txt',append,S),
+		  write(S,'.'),nl(S),close(S).
+		  
+ file_write(Name,Age,Origin,Type,Height,Weight) :-
       format(atom(H),'~3f',[Height]),
 		 open('expert_db.txt',append,Stream),
 		 write(Stream,
@@ -54,13 +81,21 @@ calculate_height(Feet,Inches,Height):-
 			user_age(Age),
 			user_weight(Weight),
 			user_ethnicity(Origin),
-			user_height(H))),nl(Stream),
-			      
-		 close(Stream).
-		
+			user_height(H))),
+		     close(Stream).
+			 
+			  
+		 
+		 
+maintain(Name,Age,Origin,Status,Height,Weight) :-
+		assert(data(user(user_bmi_type(Type,user_name(Name)),
+			user_age(Age),
+			user_weight(Weight),
+			user_ethnicity(Origin),
+			user_height(H)))).
  
  % bmi classification based on height(meters) and weight(pounds).
-classify_bmi(Bmi,Name,Age,Origin,Height,Weight):- nl ,(
+classify_bmi(Bmi,Name,Age,Origin,Height,Weight) :- nl ,(
 Bmi >= 30.0 -> Status = 'obese'; 
 Bmi < 18.5 -> 
 Status = 'underWeight'; Bmi >= 18.5 ,
@@ -68,7 +103,11 @@ Status = 'underWeight'; Bmi >= 18.5 ,
  Bmi >= 25 , Bmi < 30 -> Status = 'overWeight'
 ),nl, file_write(Name,Age,Origin,Status,Height,Weight).
 
-
+% retracts all stored data
+retract_data :-
+		retractall(data(user(_,_,_,_,_))),
+		retractall(data(_)).
+        
 bmi_input(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
 calculate_height(Feet,Inches,Height), % returned Height in meters.
 calculate_weight(Weight,Kilogram),  % returned weight in pounds.
@@ -374,5 +413,5 @@ run_program:-
 */
 engine(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category):-
 % prompt user for input
-    test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category).
+    test_user_data(Name,Age,Weight,Origin,Feet,Inches,WaistCir,ExerAmt,VegFruits,HighBP,HighBG,Gender,Category),file_write_2.
 	
