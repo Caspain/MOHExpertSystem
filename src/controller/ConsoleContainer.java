@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
 public class ConsoleContainer extends OutputStream{
@@ -17,8 +18,13 @@ public class ConsoleContainer extends OutputStream{
     @Override
     public void write(int i) throws IOException
     {
-        output.appendText(String.valueOf((char) i));
+    	 appendText(String.valueOf((char)i));
+    	 
+      //  output.appendText(String.valueOf((char) i));
     }
 
+    public void appendText(String valueOf) {
+        Platform.runLater(() -> output.appendText(valueOf));
+    }
 
 }

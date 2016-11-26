@@ -1,5 +1,6 @@
 package view;
 
+import java.io.PrintStream;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,6 +14,8 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
 
+import controller.ConsoleApp;
+import controller.ConsoleContainer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -52,6 +55,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.Model;
+import view.Main.Scenes.CONSOLE;
 //import model.Model;
 
 public class Main extends Application {
@@ -145,6 +149,8 @@ public class Main extends Application {
 					Scenes.Indexer.SetUpComponents();
 					PrimaryStage.setScene(Scenes.IndexerScene);
 					Scenes.IndexerScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
+					//CONSOLE.SetUp();
+					
 				}
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -180,11 +186,19 @@ public class Main extends Application {
 				HBox root = new HBox();
 				root.setPadding(new Insets(5));
 				root.setSpacing(5);*/
-				TextArea ta = TextAreaBuilder.create()
-					    .prefWidth(800)
-					    .prefHeight(600)
-					    .wrapText(true)
-					    .build();
+				
+				TextArea main_area = new TextArea();
+				main_area.setPrefWidth(400);
+				main_area.setPrefHeight(500);
+				main_area.setWrapText(true);
+				
+				ConsoleContainer console = new ConsoleContainer(main_area);
+				PrintStream ps = new PrintStream(console, true);
+				System.setOut(ps);
+				System.setErr(ps);
+				ConsoleScene = new Scene(main_area);
+				PrimaryStage.setScene(ConsoleScene);
+				PrimaryStage.show();
 			}
 			
 	
@@ -196,7 +210,17 @@ public class Main extends Application {
 			public static TextField Field = new TextField();
 			public static Button SubmitQuery = new Button("Submit");
 			public static Button IndexQuery = new Button("Back");
-
+			static PrintStream ps;
+			
+			 public static void SetStream(String stream) {
+			        System.setOut(ps);
+			        System.setErr(ps);
+			        System.out.println(stream);
+			    }
+			 public static TextArea EraseStream(TextArea main){
+				 main.clear();
+				 return main;
+			 }
 			public static void SetUp() {
 				FlowPane root = new FlowPane();
 				root.setHgap(5);
@@ -212,7 +236,22 @@ public class Main extends Application {
 				queryBox.getChildren().add(IndexQuery);
 
 				root.getChildren().add(queryBox);
-				QueryScene = new Scene(root, 200, 69);
+				
+				TextArea main_area = new TextArea();
+				main_area.setPrefWidth(192.55);
+				main_area.setPrefHeight(138);
+				main_area.setWrapText(true);
+				main_area.setEditable(false);
+				
+				ConsoleContainer console = new ConsoleContainer(main_area);
+			     ps = new PrintStream(console);
+				System.setOut(ps);
+				System.setErr(ps);
+				
+				
+				root.getChildren().add(main_area);
+				
+				QueryScene = new Scene(root, 200, 240);
 				root.setId("query-root");
 				Field.setId("field");
 				SubmitQuery.setId("submit-query");
@@ -248,8 +287,10 @@ public class Main extends Application {
 						break;
 					}
 					case "stat_user_all":{
+						
 						if(results.length > 1){
 							model.stat_user_all(results[1]);
+							SetStream("results");
 						}else{
 							System.out.println("name is required " + query);
 						}
