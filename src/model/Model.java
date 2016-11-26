@@ -297,7 +297,7 @@ public class Model {
 		Variable age = new Variable("Count");
 		Query ageTerm = new Query("stat_num_high_risk", new Term[] { age });
 
-		System.out.println("getting count of high risk");
+
 		if (ageTerm.hasMoreElements()) {
 
 			Object c = ageTerm.nextElement();
@@ -550,8 +550,15 @@ public class Model {
 		while (data.hasNext()) {
 			String[] x = data.next().toString().split("record");
 			for (int i = 0; i < x.length; i++) {
-				System.out.println(!x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
-						.replace("}", "").replace("{", "").equals("Records="));
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if(!res.equals("Records=")){
+					
+					 {
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
 
 			}
 		}
