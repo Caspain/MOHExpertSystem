@@ -150,8 +150,8 @@ public class Main extends Application {
 					Scenes.Indexer.SetUpComponents();
 					PrimaryStage.setScene(Scenes.IndexerScene);
 					Scenes.IndexerScene.getStylesheets().add(Main.class.getResource("Styles.css").toExternalForm());
-					//CONSOLE.SetUp();
-					
+					// CONSOLE.SetUp();
+
 				}
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -178,21 +178,20 @@ public class Main extends Application {
 		public static Scene IndexerScene = null;
 		public static Scene RecomendationScene = null;
 		public static Scene ConsoleScene = null;
-		
-		public static class CONSOLE{
-			
-			
-			public static void SetUp(){
-				/*TextArea console_area = new TextArea();
-				HBox root = new HBox();
-				root.setPadding(new Insets(5));
-				root.setSpacing(5);*/
-				
+
+		public static class CONSOLE {
+
+			public static void SetUp() {
+				/*
+				 * TextArea console_area = new TextArea(); HBox root = new
+				 * HBox(); root.setPadding(new Insets(5)); root.setSpacing(5);
+				 */
+
 				TextArea main_area = new TextArea();
 				main_area.setPrefWidth(400);
 				main_area.setPrefHeight(500);
 				main_area.setWrapText(true);
-				
+
 				ConsoleContainer console = new ConsoleContainer(main_area);
 				PrintStream ps = new PrintStream(console, true);
 				System.setOut(ps);
@@ -201,9 +200,7 @@ public class Main extends Application {
 				PrimaryStage.setScene(ConsoleScene);
 				PrimaryStage.show();
 			}
-			
-	
-			
+
 		}
 
 		public static class Query {
@@ -213,20 +210,21 @@ public class Main extends Application {
 			public static Button IndexQuery = new Button("Back");
 			public static Button Clear = new Button("Clear");
 			static PrintStream ps;
-			
-			 public static void SetStream(String stream) {
-				
-					    System.setOut(ps);
-				        System.setErr(ps);
-				        System.out.println(stream);
-				
-			       
-			    }
-			 public static TextArea EraseStream(TextArea main){
-				 
-				 main.clear();
-				 return main;
-			 }
+
+			public static void SetStream(String stream) {
+
+				System.setOut(ps);
+				System.setErr(ps);
+				System.out.println(stream);
+
+			}
+
+			public static TextArea EraseStream(TextArea main) {
+
+				main.clear();
+				return main;
+			}
+
 			public static void SetUp() {
 				FlowPane root = new FlowPane();
 				root.setHgap(4.5);
@@ -242,31 +240,32 @@ public class Main extends Application {
 				queryBox.getChildren().add(IndexQuery);
 
 				root.getChildren().add(queryBox);
-				
-			TextArea main_area = new TextArea();
+
+				TextArea main_area = new TextArea();
 				main_area.setPrefWidth(192.55);
 				main_area.setPrefHeight(138);
 				main_area.setWrapText(true);
 				main_area.setEditable(false);
-				
+
 				ConsoleContainer console = new ConsoleContainer(main_area);
-			     ps = new PrintStream(console);
+				ps = new PrintStream(console);
 				System.setOut(ps);
-				System.setErr(ps);		
+				System.setErr(ps);
 				root.getChildren().add(main_area);
-				
+
 				root.getChildren().add(Clear);
-				
-				Clear.setOnAction((event)->{
-					
-					 try {
-						    TimeUnit.SECONDS.sleep((long) 0.89); //sleep for 2 .3 seconds
-						    if(!main_area.getText().isEmpty()){
-						    	main_area.clear();
-						    }
-					 }catch(Exception e){
-						 System.out.println(e.getMessage());
-					 }
+
+				Clear.setOnAction((event) -> {
+
+					try {
+						TimeUnit.SECONDS.sleep((long) 0.89); // sleep for 2 .3
+																// seconds
+						if (!main_area.getText().isEmpty()) {
+							main_area.clear();
+						}
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				});
 				QueryScene = new Scene(root, 200, 260);
 				root.setId("query-root");
@@ -280,131 +279,131 @@ public class Main extends Application {
 				SubmitQuery.setOnAction((event) -> {
 
 					String query = getQueryText();
-					  String[] results = query.split("->");
-                     String response = "null";
-					switch(results[0]){
-					 
-					case "stat_min_age":{
-					model.getMinimumAge();
-						break;
-					}
-					case "stat_max_age":{
+					String[] results = query.split("->");
+					String response = "null";
+					switch (results[0]) {
+
+					case "stat_min_age": {
 						model.getMinimumAge();
 						break;
 					}
-					case "stat_family_history":{
+					case "stat_max_age": {
+						model.getMaximumAge();;
+						break;
+					}
+					case "stat_family_history": {
 						model.stat_family_history();
 						break;
 					}
-					case "stat_avg_age":{
+					case "stat_avg_age": {
 						model.stat_avg_age();
 						break;
 					}
-					case "stat_num_high_risk":{
+					case "stat_num_high_risk": {
 						model.stat_num_records();
 						break;
 					}
-					case "stat_user_all":{
-						
-						if(results.length > 1){
+					case "stat_user_all": {
+
+						if (results.length > 1) {
 							model.stat_user_all(results[1]);
-						   
-						}else{
+
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_user_weight":{
-						if(results.length > 1){
+					case "stat_user_weight": {
+						if (results.length > 1) {
 							model.stat_user_weight(results[1]);
-						}else{
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_user_height":{
-						if(results.length > 1){
+					case "stat_user_height": {
+						if (results.length > 1) {
 							model.stat_user_height(results[1]);
-						}else{
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_user_bmi":{
-						if(results.length > 1){
+					case "stat_user_bmi": {
+						if (results.length > 1) {
 							model.stat_user_bmi(results[1]);
-						}else{
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_user_age":{
-						if(results.length > 1){
+					case "stat_user_age": {
+						if (results.length > 1) {
 							model.stat_user_age(results[1]);
-						}else{
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_user_ethnicity":{
-						if(results.length > 1){
+					case "stat_user_ethnicity": {
+						if (results.length > 1) {
 							model.stat_user_ethnicity(results[1]);
-						}else{
+						} else {
 							System.out.println("name is required " + query);
 						}
-						
+
 						break;
 					}
-					case "stat_height_filter_below":{
+					case "stat_height_filter_below": {
 						model.stat_height_filter_below(Integer.parseInt(results[1]));
 						break;
 					}
-					case "stat_height_filter_above":{
+					case "stat_height_filter_above": {
 						model.stat_height_filter_above(Integer.parseInt(results[1]));
 						break;
 					}
-					case "stat_weight_filter_below":{
+					case "stat_weight_filter_below": {
 						model.stat_weight_filter_below(Integer.parseInt(results[1]));
 						break;
 					}
-					case "stat_weight_filter_above":{
+					case "stat_weight_filter_above": {
 						model.stat_weight_filter_above(Integer.parseInt(results[1]));
 						break;
 					}
-					case "stat_family_history_filter":{
+					case "stat_family_history_filter": {
 						model.stat_family_history_filter(Integer.parseInt(results[1]));
 						break;
 					}
-					case "stat_gender_filter":{
+					case "stat_gender_filter": {
 						model.stat_gender_filter((results[1]));
 						break;
 					}
-					case "stat_risk_filter":{
+					case "stat_risk_filter": {
 						model.stat_risk_filter((results[1]));
 						break;
 					}
-					case "stat_age_filter_below":{
+					case "stat_age_filter_below": {
 						model.stat_age_filter_below((Integer.parseInt(results[1])));
 						break;
 					}
-					case "stat_age_filter_above":{
+					case "stat_age_filter_above": {
 						model.stat_age_filter_above((Integer.parseInt(results[1])));
 						break;
 					}
-					
+
 					default:
 						System.out.println("invalid query parameter: " + query);
 						break;
 					}
-					
-					//Erase stream here
-					
-					//ShowQueryResponse(response);
+
+					// Erase stream here
+
+					// ShowQueryResponse(response);
 				});
 				/*
 				 * go back to indexer scene
@@ -419,7 +418,7 @@ public class Main extends Application {
 			}
 
 			public static String getQueryText() {
-			
+
 				return Field.getText().toString();
 			}
 
@@ -574,8 +573,8 @@ public class Main extends Application {
 					String result = Model.Trigger(age, user_gender, name, weight, ethnicity, heightInches, heightFeet,
 							waistCircumference, toggle1, toggle2, toggle3, toggle4, category); // display
 																								// scene
-					
-					//call spike alert instead
+
+					// call spike alert instead
 					ShowRecomendations(result);
 				});
 				Submit.setId("submit-query");
@@ -919,7 +918,7 @@ public class Main extends Application {
 		}
 
 		public static ScrollPane DisplayRecomendations(String result) {
-			
+
 			ScrollPane root = new ScrollPane();
 			root.setFitToWidth(true);
 			root.setFitToHeight(false);
@@ -936,34 +935,36 @@ public class Main extends Application {
 			Text aerobic_Exercise = new Text();
 
 			strengthTraining.setWrappingWidth(287);
-			aerobic_Exercise.setWrappingWidth(287);  
-			
+			aerobic_Exercise.setWrappingWidth(287);
+
 			Label label1 = new Label("Aerobic Exercise");
 			label1.setTextAlignment(TextAlignment.CENTER);
 			label1.setWrapText(true);
-			
+
 			Label label2 = new Label();
 			label2.setTextAlignment(TextAlignment.CENTER);
 			label2.setWrapText(true);
 			label2.setText("Strength Training");
-			
-			strengthTraining.setText("Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
-            aerobic_Exercise.setText("Aerobic exercise helps your body use insulin better. It makes your heart and bones strong, relieves stress, improves blood circulation, and reduces your risk for heart disease by lowering blood glucose and blood pressure and improving cholesterol levels. Recommend: Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising");
+
+			strengthTraining.setText(
+					"Strength training (also called resistance training) makes your body more sensitive to insulin and can lower blood glucose. It helps to maintain and build strong muscles and bones, reducing your risk for osteoporosis and bone fractures. The more muscle you have, the more calories you burn – even when your body is at rest.Preventing muscle loss by strength training is also the key to maintaining an independent lifestyle as you age. Recommended: doing some type of strength training at least 2 times per week in addition to aerobic activity.");
+			aerobic_Exercise.setText(
+					"Aerobic exercise helps your body use insulin better. It makes your heart and bones strong, relieves stress, improves blood circulation, and reduces your risk for heart disease by lowering blood glucose and blood pressure and improving cholesterol levels. Recommend: Aiming for 30 minutes of moderate-to-vigorous intensity aerobic exercise at least 5 days a week or a total of 150 minutes per week. Spread your activity out over at least 3 days during the week and try not to go more than 2 days in a row without exercising");
 			Button back = new Button(" < Back");
 			Separator line1 = new Separator();
 			Separator line2 = new Separator();
 
-			//strength training
+			// strength training
 			child.getChildren().add(label2);
 			child.getChildren().add(strengthTraining);
 			child.getChildren().add(line2);
-			
-			//"Aerobic Exercise"
+
+			// "Aerobic Exercise"
 			child.getChildren().add(label1);
 			child.getChildren().add(aerobic_Exercise);
-			
-			
-			//////////----------------------------------back navigation---------------------------------
+
+			////////// ----------------------------------back
+			////////// navigation---------------------------------
 			child.getChildren().add(line1);
 			child.getChildren().add(back);
 
@@ -981,16 +982,17 @@ public class Main extends Application {
 			});
 			SwitchScene(RECOMENDATION_SCENE, root);
 
-			 //re consult database here
-			 model.consultDb();
+			// re consult database here
+			model.consultDb();
 			return root;
 
 		}
 
-		public static void ShowRecomendations(String query){
-		
+		public static void ShowRecomendations(String query) {
+
 			DisplayRecomendations("");// displays
 		}
+
 		public static boolean Recomendation_Back = false;
 		public static final String QUERY_SCENE = "QUERY-SCENE";
 		public static final String INPUT_SCENE = "INPUT-SCENE";
