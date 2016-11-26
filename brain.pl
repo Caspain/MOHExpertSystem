@@ -130,13 +130,13 @@ classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
   data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Height),fail.
   
   stat_user_bmi(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Type),fail.
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Type),fail.
   
   stat_user_age(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Age),fail.
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Age),fail.
   
   stat_user_ethnicity(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Origin),fail.
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Origin),fail.
 
 % defines the format for user input variables
 % facts

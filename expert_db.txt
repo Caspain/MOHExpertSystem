@@ -4,3 +4,10 @@ user(user_bmi_type(normalWeight,user_name(ricky)),user_age(27),user_weight(70.30
 user(user_bmi_type(normalWeight,user_name(king)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).
 user(user_bmi_type(normalWeight,user_name(admin)),user_age(30),user_weight(70.30676),user_ethnicity(cuabn),user_height(1.930)).
 user(user_bmi_type(normalWeight,user_name(king2)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).
+user(user_bmi_type(overWeight,user_name(jack)),user_age(23),user_weight(70.30676),user_ethnicity(cuabn),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(soly)),user_age(23),user_weight(65.77083999999999),user_ethnicity(jamaican),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(bni)),user_age(24),user_weight(74.84268),user_ethnicity(cuban),user_height(1.854)).
+user(user_bmi_type(normalWeight,user_name(teacher)),user_age(33),user_weight(75.296272),user_ethnicity(nab),user_height(1.956)).
+user(user_bmi_type(normalWeight,user_name(shervain)),user_age(23),user_weight(68.0388),user_ethnicity(jamaican),user_height(1.854)).
+user(user_bmi_type(normalWeight,user_name(king4)),user_age(21),user_weight(65.77083999999999),user_ethnicity(jam),user_height(1.651)).
+user(user_bmi_type(normalWeight,user_name(love)),user_age(25),user_weight(69.399576),user_ethnicity(american),user_height(1.676)).

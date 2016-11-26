@@ -506,23 +506,29 @@ public class Model {
      */
     public void stat_age_filter_below(int age){
     	Query data = new Query("stat_age_filter_below",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
-		if(data.hasMoreElements()){
-			System.out.println(data.nextElement().toString());
-		}
-		if(data.hasSolution()){
-			System.out.println("success. stat_age_filter_below");
+    	while(data.hasNext()){
+    		String[] x = data.next().toString().split("record");
+			for(int i = 0; i < x.length;i++ ){
+				System.out.println(!x[i].replace("(","").replace(")", "").replace ("'[|]'", "").replace("'[]'", "").replace("}", "").replace("{", "").equals("Records="));
+				
+			}
 		}
         }
     /*
    finds list of records in age above limit
     */
    public void stat_age_filter_above(int age){
+	  
 		Query data = new Query("stat_age_filter_above",new Term[]{(new org.jpl7.Integer((age))),new Variable("Records")});
-		if(data.hasMoreElements()){
-			System.out.println(data.nextElement().toString());
+		while(data.hasNext()){
+			
+			System.out.println(data.next());
 		}
+		
+		/*
 		if(data.hasSolution()){
 			System.out.println("success. stat_age_filter_above");
 		}
+		*/
        }
 }

@@ -33,6 +33,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -168,6 +170,26 @@ public class Main extends Application {
 		public static Scene InputScene = null;
 		public static Scene IndexerScene = null;
 		public static Scene RecomendationScene = null;
+		public static Scene ConsoleScene = null;
+		
+		public static class CONSOLE{
+			
+			
+			public static void SetUp(){
+				/*TextArea console_area = new TextArea();
+				HBox root = new HBox();
+				root.setPadding(new Insets(5));
+				root.setSpacing(5);*/
+				TextArea ta = TextAreaBuilder.create()
+					    .prefWidth(800)
+					    .prefHeight(600)
+					    .wrapText(true)
+					    .build();
+			}
+			
+	
+			
+		}
 
 		public static class Query {
 			public static Text query = new Text("Query");
@@ -335,6 +357,7 @@ public class Main extends Application {
 			}
 
 			public static String getQueryText() {
+			
 				return Field.getText().toString();
 			}
 
