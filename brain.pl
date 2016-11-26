@@ -124,19 +124,19 @@ classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
   nl,write(Type), nl, write(Age),nl ,write(Weight),nl, write(Origin), nl , write(Height),fail.
 
   stat_user_weight(Name,Weight):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write(Weight),!.
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Weight),!.
   
-  stat_user_height(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Height),fail.
+  stat_user_height(Name,Height):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Height),!.
   
-  stat_user_bmi(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Type),fail.
+  stat_user_bmi(Name,Type):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Type),!.
   
-  stat_user_age(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Age),fail.
+  stat_user_age(Name,Age):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Age),!.
   
-  stat_user_ethnicity(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write('Name :'),write(Name),nl,write(Origin),fail.
+  stat_user_ethnicity(Name,Origin):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Origin),!.
 
 % defines the format for user input variables
 % facts

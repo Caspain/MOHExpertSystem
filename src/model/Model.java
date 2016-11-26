@@ -379,41 +379,59 @@ public class Model {
      * stat_user_weight
      */
     public void   stat_user_height(String name){
-    	Query data = new Query("stat_user_height",new Term[]{new Atom(name)});
+    	Variable X = new Variable("Height");
+    	Query data = new Query("stat_user_height",new Term[]{new Atom(name),X});
     		
-    		if(data.hasSolution()){
+    	if(data.hasMoreElements()){
+    		System.out.println(data.nextElement().toString());
+    	}
+    		/*if(data.hasSolution()){
     			System.out.println("success. name  stat_user_height");
-    		}
+    		}*/
         }
     /*
      * stat_user_bmi
      */
     public void   stat_user_bmi(String name){
-    	Query data = new Query("stat_user_bmi",new Term[]{new Atom(name)});
-    		
-    		if(data.hasSolution()){
+    	Variable X = new Variable("Type");
+    	Query data = new Query("stat_user_bmi",new Term[]{new Atom(name),X});
+    	
+    	if(data.hasMoreElements()){
+    		System.out.println(data.nextElement().toString());
+    	}
+    	/*	if(data.hasSolution()){
     			System.out.println("success. name  stat_user_bmi");
-    		}
+    		}*/
         }
     /*
      * stat_user_bmi
      */
     public void   stat_user_age(String name){
-    	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
+    	Variable X = new Variable("Age");
+    	Query data = new Query("stat_user_age",new Term[]{new Atom(name),X});
     		
-    		if(data.hasSolution()){
+
+    	if(data.hasMoreElements()){
+    		System.out.println(data.nextElement().toString());
+    	}
+    		/*if(data.hasSolution()){
     			System.out.println("success. name stat_user_age");
-    		}
+    		}*/
         }
     /*
      * stat_user_ethnicity
      */
     public void  stat_user_ethnicity(String name){
-    	Query data = new Query("stat_user_age",new Term[]{new Atom(name)});
-    		
+    	Variable X = new Variable("Ethnicity");
+    	Query data = new Query("stat_user_ethnicity",new Term[]{new Atom(name),X});
+    		/*
     		if(data.hasSolution()){
     			System.out.println("success. name stat_user_ethnicity");
     		}
+    		*/
+    	if(data.hasMoreElements()){
+    		System.out.println(data.nextElement().toString());
+    	}
         }
     //----------------------------------------------------------------------------------------filter rules
     
