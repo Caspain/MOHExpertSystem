@@ -184,7 +184,6 @@ public class Model {
 		Variable age = new Variable("MinAge");
 		Query ageTerm = new Query("stat_min_age", new Term[] { age });
 
-	
 		if (ageTerm.hasMoreElements()) {
 
 			Object c = ageTerm.nextElement();
@@ -213,7 +212,6 @@ public class Model {
 		Variable age = new Variable("MaxAge");
 		Query ageTerm = new Query("stat_max_age", new Term[] { age });
 
-		
 		if (ageTerm.hasMoreElements()) {
 
 			Object c = ageTerm.nextElement();
@@ -241,7 +239,6 @@ public class Model {
 		Variable age = new Variable("HistoryCount");
 		Query ageTerm = new Query("stat_family_history", new Term[] { age });
 
-	
 		if (ageTerm.hasMoreElements()) {
 
 			Object c = ageTerm.nextElement();
@@ -269,7 +266,6 @@ public class Model {
 		Variable age = new Variable("AverageAge");
 		Query ageTerm = new Query("stat_avg_age", new Term[] { age });
 
-
 		if (ageTerm.hasMoreElements()) {
 
 			Object c = ageTerm.nextElement();
@@ -296,7 +292,6 @@ public class Model {
 	public void stat_num_records() {
 		Variable age = new Variable("Count");
 		Query ageTerm = new Query("stat_num_high_risk", new Term[] { age });
-
 
 		if (ageTerm.hasMoreElements()) {
 
@@ -451,11 +446,20 @@ public class Model {
 	public void stat_height_filter_below(int age) {
 		Query data = new Query("stat_height_filter_below",
 				new Term[] { (new org.jpl7.Integer((age))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
-		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_height_filter_below");
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
 	}
 
@@ -465,11 +469,20 @@ public class Model {
 	public void stat_height_filter_above(int age) {
 		Query data = new Query("stat_height_filter_above",
 				new Term[] { (new org.jpl7.Integer((age))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
-		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_height_filter_above");
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
 	}
 
@@ -479,11 +492,20 @@ public class Model {
 	public void stat_weight_filter_below(int weight) {
 		Query data = new Query("stat_weight_filter_below",
 				new Term[] { (new org.jpl7.Integer((weight))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
-		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_weight_filter_below");
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
 	}
 
@@ -493,12 +515,22 @@ public class Model {
 	public void stat_weight_filter_above(int weight) {
 		Query data = new Query("stat_weight_filter_above",
 				new Term[] { (new org.jpl7.Integer((weight))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_weight_filter_above");
-		}
+		
 	}
 
 	/*
@@ -507,25 +539,46 @@ public class Model {
 	public void stat_family_history_filter(int code) {
 		Query data = new Query("stat_family_history_filter",
 				new Term[] { (new org.jpl7.Integer((code))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_family_history_filter");
-		}
+		
 	}
 
 	/*
 	 * returns records based on gender
 	 */
 	public void stat_gender_filter(String gender) {
+		
 		Query data = new Query("stat_gender_filter", new Term[] { (new Atom((gender))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_gender_filter");
-		}
+		
 	}
 
 	/*
@@ -533,12 +586,22 @@ public class Model {
 	 */
 	public void stat_risk_filter(String risk) {
 		Query data = new Query("stat_risk_filter", new Term[] { (new Atom((risk))), new Variable("Records") });
-		if (data.hasMoreElements()) {
-			System.out.println(data.nextElement().toString());
+		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
+
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
-		if (data.hasSolution()) {
-			System.out.println("success. stat_risk_filter");
-		}
+		
 	}
 
 	/*
@@ -552,9 +615,9 @@ public class Model {
 			for (int i = 0; i < x.length; i++) {
 				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
 						.replace("}", "").replace("{", ""));
-				if(!res.equals("Records=")){
-					
-					 {
+				if (!res.equals("Records=")) {
+
+					{
 						System.out.println(res);
 						System.out.println(System.getProperty("line.separator"));
 					}
@@ -572,8 +635,19 @@ public class Model {
 		Query data = new Query("stat_age_filter_above",
 				new Term[] { (new org.jpl7.Integer((age))), new Variable("Records") });
 		while (data.hasNext()) {
+			String[] x = data.next().toString().split("record");
+			for (int i = 0; i < x.length; i++) {
+				String res = (x[i].replace("(", "").replace(")", "").replace("'[|]'", "").replace("'[]'", "")
+						.replace("}", "").replace("{", ""));
+				if (!res.equals("Records=")) {
 
-			System.out.println(data.next());
+					{
+						System.out.println(res);
+						System.out.println(System.getProperty("line.separator"));
+					}
+				}
+
+			}
 		}
 
 		/*
