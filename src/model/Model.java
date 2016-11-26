@@ -355,11 +355,21 @@ public class Model {
      */
 	
     public void  stat_user_all(String name){
-	Query data = new Query("stat_user_all",new Term[]{new Atom(name)});
-		
+    	Variable age = new Variable("Age");
+     	Variable height = new Variable("Height");
+     	Variable  weight = new Variable("Weight");
+     	Variable ethnicity = new Variable("Origin");
+     	Variable type = new Variable("Type");
+     
+	Query data = new Query("stat_user_all",new Term[]{new Atom(name),type,weight,age,ethnicity,height});
+		/*
 		if(data.hasSolution()){
 			System.out.println("success. name all");
 		}
+		*/
+	if(data.hasMoreElements()){
+		System.out.println(data.nextElement().toString());
+	}
     }
     /*
      * stat_user_weight

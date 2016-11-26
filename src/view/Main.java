@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.jpl7.Atom;
 import org.jpl7.Compound;
@@ -213,11 +214,15 @@ public class Main extends Application {
 			static PrintStream ps;
 			
 			 public static void SetStream(String stream) {
-			        System.setOut(ps);
-			        System.setErr(ps);
-			        System.out.println(stream);
+				
+					    System.setOut(ps);
+				        System.setErr(ps);
+				        System.out.println(stream);
+				
+			       
 			    }
 			 public static TextArea EraseStream(TextArea main){
+				 
 				 main.clear();
 				 return main;
 			 }
@@ -237,7 +242,7 @@ public class Main extends Application {
 
 				root.getChildren().add(queryBox);
 				
-				TextArea main_area = new TextArea();
+			TextArea main_area = new TextArea();
 				main_area.setPrefWidth(192.55);
 				main_area.setPrefHeight(138);
 				main_area.setWrapText(true);
@@ -288,7 +293,7 @@ public class Main extends Application {
 						
 						if(results.length > 1){
 							model.stat_user_all(results[1]);
-							SetStream("results");
+						   
 						}else{
 							System.out.println("name is required " + query);
 						}
@@ -381,6 +386,15 @@ public class Main extends Application {
 						System.out.println("invalid query parameter: " + query);
 						break;
 					}
+					//Erase stream here
+					 try {
+						    TimeUnit.SECONDS.sleep((long) 2.34); //sleep for 2 .3 seconds
+						    if(!main_area.getText().isEmpty()){
+						    	main_area.clear();
+						    }
+					 }catch(Exception e){
+						 System.out.println(e.getMessage());
+					 }
 					//ShowQueryResponse(response);
 				});
 				/*

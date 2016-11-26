@@ -119,9 +119,9 @@ update_database(Gender, Age, Weight, H, WaistCir, ExerAmt, VegFruits, HighBP, Hi
 classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
 
 
-  stat_user_all(Name) :-
+  stat_user_all(Name,Type,Weight,Age,Origin,Height) :-
   data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),
-  nl,write(Type), nl, write(Age),nl ,write(Weight),nl, write(Origin), nl , write(Height),fail.
+  nl,write(Type), nl, write(Age),nl ,write(Weight),nl, write(Origin), nl , write(Height),!.
 
   stat_user_weight(Name,Weight):-
   data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Weight),!.
