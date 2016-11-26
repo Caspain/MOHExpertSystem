@@ -211,6 +211,7 @@ public class Main extends Application {
 			public static TextField Field = new TextField();
 			public static Button SubmitQuery = new Button("Submit");
 			public static Button IndexQuery = new Button("Back");
+			public static Button Clear = new Button("Clear");
 			static PrintStream ps;
 			
 			 public static void SetStream(String stream) {
@@ -228,8 +229,8 @@ public class Main extends Application {
 			 }
 			public static void SetUp() {
 				FlowPane root = new FlowPane();
-				root.setHgap(5);
-				root.setVgap(15);
+				root.setHgap(4.5);
+				root.setVgap(10);
 				root.setPadding(new Insets(5));
 
 				root.getChildren().add(query);
@@ -254,11 +255,25 @@ public class Main extends Application {
 				System.setErr(ps);		
 				root.getChildren().add(main_area);
 				
-				QueryScene = new Scene(root, 200, 240);
+				root.getChildren().add(Clear);
+				
+				Clear.setOnAction((event)->{
+					
+					 try {
+						    TimeUnit.SECONDS.sleep((long) 0.89); //sleep for 2 .3 seconds
+						    if(!main_area.getText().isEmpty()){
+						    	main_area.clear();
+						    }
+					 }catch(Exception e){
+						 System.out.println(e.getMessage());
+					 }
+				});
+				QueryScene = new Scene(root, 200, 260);
 				root.setId("query-root");
 				Field.setId("field");
 				SubmitQuery.setId("submit-query");
 				IndexQuery.setId("submit-query");
+				Clear.setId("submit-query");
 
 				SubmitQuery.setPrefWidth(65);
 
@@ -386,15 +401,9 @@ public class Main extends Application {
 						System.out.println("invalid query parameter: " + query);
 						break;
 					}
+					
 					//Erase stream here
-					 try {
-						    TimeUnit.SECONDS.sleep((long) 2.34); //sleep for 2 .3 seconds
-						    if(!main_area.getText().isEmpty()){
-						    	main_area.clear();
-						    }
-					 }catch(Exception e){
-						 System.out.println(e.getMessage());
-					 }
+					
 					//ShowQueryResponse(response);
 				});
 				/*
