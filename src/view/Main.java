@@ -246,9 +246,7 @@ public class Main extends Application {
 				ConsoleContainer console = new ConsoleContainer(main_area);
 			     ps = new PrintStream(console);
 				System.setOut(ps);
-				System.setErr(ps);
-				
-				
+				System.setErr(ps);		
 				root.getChildren().add(main_area);
 				
 				QueryScene = new Scene(root, 200, 240);
@@ -383,7 +381,7 @@ public class Main extends Application {
 						System.out.println("invalid query parameter: " + query);
 						break;
 					}
-					ShowQueryResponse(response);
+					//ShowQueryResponse(response);
 				});
 				/*
 				 * go back to indexer scene

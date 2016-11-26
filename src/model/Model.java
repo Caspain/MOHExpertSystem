@@ -365,11 +365,15 @@ public class Model {
      * stat_user_weight
      */
     public void  stat_user_weight(String name){
-    	Query data = new Query("stat_user_weight",new Term[]{new Atom(name)});
+    	Variable X = new Variable("Weight");
+    	Query data = new Query("stat_user_weight",new Term[]{new Atom(name),X});
     		
-    		if(data.hasSolution()){
+    	if(data.hasMoreElements()){
+    		System.out.println(data.nextElement().toString());
+    	}
+    		/*if(data.hasSolution()){
     			System.out.println("success. name stat_user_weight");
-    		}
+    		}*/
         }
     /*
      * stat_user_weight

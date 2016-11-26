@@ -123,8 +123,8 @@ classify_bmi(Bmi,Name,Age,Origin,Height,Kilogram). % later you can persist
   data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),
   nl,write(Type), nl, write(Age),nl ,write(Weight),nl, write(Origin), nl , write(Height),fail.
 
-  stat_user_weight(Name):-
-  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Weight),fail.
+  stat_user_weight(Name,Weight):-
+  data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),nl,write(Weight),!.
   
   stat_user_height(Name):-
   data(user(user_bmi_type(Type,user_name(Name)),user_age(Age),user_weight(Weight),user_ethnicity(Origin),user_height(Height))),write(Name),nl,write(Height),fail.
